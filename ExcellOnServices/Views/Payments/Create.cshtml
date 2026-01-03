@@ -1,0 +1,196 @@
+﻿@model ExcellOnServices.Models.Payment
+
+@{
+    ViewData["Title"] = "Record New Payment";
+}
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            <i class="fas fa-money-check-alt mr-2"></i>Record New Payment
+                        </h3>
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <form asp-action="Create">
+                        <div class="card-body" style="background-color:#271940;">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            
+                            <div class="form-group">
+                                <label asp-for="ClientId" class="control-label text-light"></label>
+                                <select asp-for="ClientId" class="form-control bg-dark text-light border-dark" asp-items="ViewBag.ClientId" required>
+                                    <option value="">-- Select Client --</option>
+                                </select>
+                                <span asp-validation-for="ClientId" class="text-danger"></span>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label asp-for="Amount" class="control-label text-light"></label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text bg-dark text-light border-dark">$</span>
+                                    </div>
+                                    <input asp-for="Amount" class="form-control bg-dark text-light border-dark" placeholder="0.00" required />
+                                </div>
+                                <span asp-validation-for="Amount" class="text-danger"></span>
+                                <small class="form-text text-muted">Enter payment amount</small>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label asp-for="PaymentDate" class="control-label text-light"></label>
+                                        <input asp-for="PaymentDate" 
+                                               class="form-control bg-dark text-light border-dark" 
+                                               type="date" 
+                                               value="@DateTime.Now.ToString("yyyy-MM-dd")"
+                                               required />
+                                        <span asp-validation-for="PaymentDate" class="text-danger"></span>
+                                        <small class="form-text text-muted">Date of payment</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label asp-for="PaymentMethod" class="control-label text-light"></label>
+                                        <select asp-for="PaymentMethod" class="form-control bg-dark text-light border-dark" required>
+                                            <option value="">-- Select Method --</option>
+                                            <option value="Bank Transfer">Bank Transfer</option>
+                                            <option value="Credit Card">Credit Card</option>
+                                            <option value="Check">Check</option>
+                                            <option value="Cash">Cash</option>
+                                            <option value="Online Payment">Online Payment</option>
+                                        </select>
+                                        <span asp-validation-for="PaymentMethod" class="text-danger"></span>
+                                        <small class="form-text text-muted">Payment method used</small>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label asp-for="Notes" class="control-label text-light"></label>
+                                <textarea asp-for="Notes" class="form-control bg-dark text-light border-dark" rows="3" placeholder="Enter payment notes (optional)"></textarea>
+                                <span asp-validation-for="Notes" class="text-danger"></span>
+                                <small class="form-text text-muted">Additional notes about this payment</small>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary">
+                                Record Payment
+                            </button>
+                            <a asp-action="Index" class="btn btn-default ml-2">Back to List</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-info">
+                    <div class="card-header">
+                        <h3 class="card-title">Payment Information</h3>
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body" style="background-color:#271940;">
+                        <p class="text-light"><strong>Standard Service Charges:</strong></p>
+                        <ul class="mb-3 text-light">
+                            <li>In-bound: $4,500/day/employee</li>
+                            <li>Out-bound: $6,000/day/employee</li>
+                            <li>Tele Marketing: $5,500/day/employee</li>
+                        </ul>
+                        <div class="alert alert-success">
+                            <i class="icon fas fa-money-bill-wave"></i>
+                            <strong>Payment Calculation:</strong><br>
+                            Total = Service Charge × Employees × Days
+                        </div>
+                        <p class="text-light small">
+                            <strong>Quick Calculation Example:</strong>
+                        </p>
+                        <div class="bg-dark p-2 rounded mb-3">
+                            <p class="mb-1 text-light small">
+                                <strong>In-bound Service:</strong><br>
+                                5 employees × 30 days × $4,500 =<br>
+                                <span class="text-success font-weight-bold">$675,000</span>
+                            </p>
+                        </div>
+                        <p class="text-muted small">
+                            Track all client payments here for accounting and reporting purposes.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    
+    <script>
+        // Set default date for PaymentDate
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Payment Create page loaded');
+            
+            const paymentDateInput = document.querySelector('input[name="PaymentDate"]');
+            if (paymentDateInput && !paymentDateInput.value) {
+                paymentDateInput.value = new Date().toISOString().split('T')[0];
+                console.log('Set default PaymentDate:', paymentDateInput.value);
+            }
+            
+            // Format amount input
+            const amountInput = document.querySelector('input[name="Amount"]');
+            if (amountInput) {
+                amountInput.addEventListener('blur', function() {
+                    if (this.value && !isNaN(this.value)) {
+                        this.value = parseFloat(this.value).toFixed(2);
+                        console.log('Formatted amount:', this.value);
+                    }
+                });
+            }
+            
+            // Debug form submission
+            const form = document.querySelector('form');
+            form.addEventListener('submit', function(e) {
+                console.log('Form submission starting...');
+                console.log('ClientId:', document.querySelector('[name="ClientId"]').value);
+                console.log('Amount:', document.querySelector('[name="Amount"]').value);
+                console.log('PaymentDate:', document.querySelector('[name="PaymentDate"]').value);
+                console.log('PaymentMethod:', document.querySelector('[name="PaymentMethod"]').value);
+                console.log('Notes:', document.querySelector('[name="Notes"]').value);
+                
+                // Validate required fields
+                const clientId = document.querySelector('[name="ClientId"]').value;
+                const amount = document.querySelector('[name="Amount"]').value;
+                const paymentMethod = document.querySelector('[name="PaymentMethod"]').value;
+                
+                if (!clientId || clientId === '') {
+                    e.preventDefault();
+                    alert('Please select a client');
+                    return;
+                }
+                
+                if (!amount || amount === '' || parseFloat(amount) <= 0) {
+                    e.preventDefault();
+                    alert('Please enter a valid amount greater than 0');
+                    return;
+                }
+                
+                if (!paymentMethod || paymentMethod === '') {
+                    e.preventDefault();
+                    alert('Please select a payment method');
+                    return;
+                }
+                
+                console.log('Form validation passed, submitting...');
+            });
+        });
+    </script>
+}

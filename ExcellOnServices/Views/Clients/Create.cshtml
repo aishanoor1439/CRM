@@ -1,0 +1,135 @@
+﻿@model ExcellOnServices.Models.Client
+
+@{
+    ViewData["Title"] = "Add New Client";
+}
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Client Information</h3>
+                    </div>
+                    <form asp-action="Create" id="createForm">
+                        <div class="card-body" style="background-color:#271940;">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            
+                            <div class="form-group">
+                                <label asp-for="CompanyName" class="control-label text-light"></label>
+                                <input asp-for="CompanyName" class="form-control bg-dark text-light border-dark" placeholder="Enter company name" required />
+                                <span asp-validation-for="CompanyName" class="text-danger"></span>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label asp-for="ContactPerson" class="control-label text-light"></label>
+                                <input asp-for="ContactPerson" class="form-control bg-dark text-light border-dark" placeholder="Enter contact person name" required />
+                                <span asp-validation-for="ContactPerson" class="text-danger"></span>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label asp-for="Email" class="control-label text-light"></label>
+                                        <input asp-for="Email" type="email" class="form-control bg-dark text-light border-dark" placeholder="contact@company.com" required />
+                                        <span asp-validation-for="Email" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label asp-for="Phone" class="control-label text-light"></label>
+                                        <input asp-for="Phone" type="tel" class="form-control bg-dark text-light border-dark" placeholder="+1 (555) 123-4567" required />
+                                        <span asp-validation-for="Phone" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label asp-for="Address" class="control-label text-light"></label>
+                                <textarea asp-for="Address" class="form-control bg-dark text-light border-dark" rows="3" placeholder="Enter company address"></textarea>
+                                <span asp-validation-for="Address" class="text-danger"></span>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label asp-for="RegistrationDate" class="control-label text-light"></label>
+                                        <input asp-for="RegistrationDate" 
+                                               type="date" 
+                                               class="form-control bg-dark text-light border-dark" 
+                                               value="@DateTime.Now.ToString("yyyy-MM-dd")"
+                                               required />
+                                        <span asp-validation-for="RegistrationDate" class="text-danger"></span>
+                                        <small class="form-text text-muted">Date when client registered</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label text-light">Status</label>
+                                        <div class="custom-control custom-switch mt-2">
+                                            <input type="checkbox" class="custom-control-input" id="isActiveSwitch" asp-for="IsActive" checked>
+                                            <label class="custom-control-label text-light" for="isActiveSwitch" asp-for="IsActive"></label>
+                                        </div>
+                                        <small class="form-text text-muted">Toggle to change client status</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-plus"></i> Create Client
+                            </button>
+                            <a asp-action="Index" class="btn btn-default ml-2">Back to List</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-info">
+                    <div class="card-header">
+                        <h3 class="card-title">About Clients</h3>
+                    </div>
+                    <div class="card-body" style="background-color:#271940;">
+                        <p class="text-light">Clients of ExcellOn Services include:</p>
+                        <ul class="text-light">
+                            <li>Manufacturers</li>
+                            <li>Service Providers</li>
+                            <li>Retail Companies</li>
+                            <li>Technology Firms</li>
+                        </ul>
+                        <div class="alert alert-info">
+                            <i class="icon fas fa-info"></i>
+                            Clients can use In-bound, Out-bound, or Tele Marketing services.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    
+    <script>
+        // Fix for date input in some browsers
+        document.addEventListener('DOMContentLoaded', function() {
+            const registrationDateInput = document.querySelector('input[name="RegistrationDate"]');
+            if (registrationDateInput && !registrationDateInput.value) {
+                registrationDateInput.value = new Date().toISOString().split('T')[0];
+            }
+            
+            // Debug logging
+            const form = document.getElementById('createForm');
+            form.addEventListener('submit', function(e) {
+                console.log('Form submitted');
+                console.log('Form data:');
+                const formData = new FormData(form);
+                for (let [key, value] of formData.entries()) {
+                    console.log(`${key}: ${value}`);
+                }
+            });
+        });
+    </script>
+}

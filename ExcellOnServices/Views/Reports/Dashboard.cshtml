@@ -1,0 +1,160 @@
+﻿@model ExcellOnServices.Controllers.DashboardReport
+
+@{
+    ViewData["Title"] = "Dashboard Report";
+}
+
+<section class="content">
+    <div class="container-fluid">
+        <!-- Summary Cards -->
+        <div class="row">
+            <div class="col-lg-3 col-6">
+                <div class="small-box bg-info">
+                    <div class="inner" style="background-color:#271940;">
+                        <h3>@Model.TotalServices</h3>
+                        <p>Total Services</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-concierge-bell"></i>
+                    </div>
+                    <a asp-controller="Services" asp-action="Index" class="small-box-footer">
+                        More info <i class="fas fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-6">
+                <div class="small-box bg-success">
+                    <div class="inner" style="background-color:#271940;">
+                        <h3>@Model.TotalDepartments</h3>
+                        <p>Total Departments</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <a asp-controller="Departments" asp-action="Index" class="small-box-footer">
+                        More info <i class="fas fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-6">
+                <div class="small-box bg-warning">
+                    <div class="inner" style="background-color:#271940;">
+                        <h3>@Model.TotalEmployees</h3>
+                        <p>Total Employees</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <a asp-controller="Employees" asp-action="Index" class="small-box-footer" style="color: #ffffff !important;">
+                        More info <i class="fas fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-6">
+                <div class="small-box bg-danger">
+                    <div class="inner" style="background-color:#271940;">
+                        <h3>@Model.TotalClients</h3>
+                        <p>Total Clients</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <a asp-controller="Clients" asp-action="Index" class="small-box-footer">
+                        More info <i class="fas fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Financial Summary -->
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Financial Summary</h3>
+                    </div>
+                    <div class="card-body" style="background-color:#271940;">
+                        <div class="row">
+                            <div class="col-6">
+                                <p class="text-muted">Total Payments Received</p>
+                                <h2 class="text-success">$@Model.TotalPayments.ToString("N2")</h2>
+                            </div>
+                            <div class="col-6">
+                                <p class="text-muted">Active Clients</p>
+                                <h2>@Model.ActiveClients / @Model.TotalClients</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <div class="card card-info">
+                    <div class="card-header">
+                        <h3 class="card-title">Service Usage</h3>
+                    </div>
+                    <div class="card-body" style="background-color:#271940;">
+                        <ul class="list-group list-group-flush">
+                            @foreach (var service in Model.ServiceUsage)
+                            {
+                                <li class="list-group-item d-flex justify-content-between align-items-center" style="background-color:#271940;">
+                                    @service.Key
+                                    <span class="badge badge-primary badge-pill">@service.Value clients</span>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Payments -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Recent Payments</h3>
+                    </div>
+                    <div class="card-body" style="background-color:#271940;>
+                        @if (Model.RecentPayments.Any())
+                        {
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Client</th>
+                                        <th>Amount</th>
+                                        <th>Date</th>
+                                        <th>Method</th>
+                                        <th>Notes</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var payment in Model.RecentPayments)
+                                    {
+                                        <tr>
+                                            <td>@payment.Client?.CompanyName</td>
+                                            <td class="text-success font-weight-bold">$@payment.Amount.ToString("N2")</td>
+                                            <td>@payment.PaymentDate.ToString("yyyy-MM-dd")</td>
+                                            <td>@payment.PaymentMethod</td>
+                                            <td>@payment.Notes</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        }
+                        else
+                        {
+                            <div class="alert alert-info">
+                                <i class="icon fas fa-info"></i>
+                                No recent payments found.
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

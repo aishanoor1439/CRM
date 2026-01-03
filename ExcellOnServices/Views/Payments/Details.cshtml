@@ -1,0 +1,211 @@
+﻿@model ExcellOnServices.Models.Payment
+
+@{
+    ViewData["Title"] = "Payment Details";
+}
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 mx-auto">
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            Payment Details
+                        </h3>
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body" style="background-color:#271940;">
+                        <div class="text-center mb-4">
+                            <div class="payment-avatar bg-success d-inline-flex align-items-center justify-content-center rounded-circle" 
+                                 style="width: 80px; height: 80px; font-size: 2rem;">
+                                <i class="fas fa-dollar-sign"></i>
+                            </div>
+                            <h4 class="mt-2 text-light">Payment Receipt</h4>
+                            <p class="text-muted">Transaction ID: PAY-@Model.Id.ToString("D6")</p>
+                        </div>
+                        
+                        <dl class="row">
+                            <dt class="col-sm-3 text-light">
+                                @Html.DisplayNameFor(model => model.Client)
+                            </dt>
+                            <dd class="col-sm-9">
+                                <div class="input-group" style="max-width: 400px;">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text bg-dark text-light border-dark">
+                                            <i class="fas fa-building"></i>
+                                        </span>
+                                    </div>
+                                    <span class="form-control bg-dark text-light border-dark font-weight-bold">
+                                        @Html.DisplayFor(model => model.Client.CompanyName)
+                                    </span>
+                                </div>
+                                @if (!string.IsNullOrEmpty(Model.Client.ContactPerson))
+                                {
+                                    <small class="form-text text-muted">Contact: @Model.Client.ContactPerson</small>
+                                }
+                            </dd>
+                            
+                            <dt class="col-sm-3 text-light">
+                                @Html.DisplayNameFor(model => model.Amount)
+                            </dt>
+                            <dd class="col-sm-9">
+                                <div class="input-group" style="max-width: 300px;">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text bg-dark text-light border-dark">
+                                            <i class="fas fa-money-bill-wave"></i>
+                                        </span>
+                                    </div>
+                                    <span class="form-control bg-dark text-light border-dark font-weight-bold">
+                                        $@Model.Amount.ToString("N2")
+                                    </span>
+                                </div>
+                                <small class="form-text text-muted">
+                                    @{
+                                        var amountInWords = ConvertAmountToWords(Model.Amount);
+                                    }
+                                    <strong>In words:</strong> @amountInWords
+                                </small>
+                            </dd>
+                            
+                            <dt class="col-sm-3 text-light">
+                                @Html.DisplayNameFor(model => model.PaymentDate)
+                            </dt>
+                            <dd class="col-sm-9">
+                                <div class="input-group" style="max-width: 300px;">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text bg-dark text-light border-dark">
+                                            <i class="far fa-calendar-alt"></i>
+                                        </span>
+                                    </div>
+                                    <span class="form-control bg-dark text-light border-dark">
+                                        @Model.PaymentDate.ToString("MMMM dd, yyyy")
+                                    </span>
+                                </div>
+                                <small class="form-text text-muted">
+                                    @{
+                                        var daysAgo = (DateTime.Now - Model.PaymentDate).Days;
+                                        var weeksAgo = daysAgo / 7;
+                                    }
+                                    @if (daysAgo == 0)
+                                    {
+                                        <span class="text-success">Today</span>
+                                    }
+                                    else if (daysAgo == 1)
+                                    {
+                                        <span class="text-info">Yesterday</span>
+                                    }
+                                    else if (daysAgo < 7)
+                                    {
+                                        <span>@daysAgo days ago</span>
+                                    }
+                                    else if (weeksAgo == 1)
+                                    {
+                                        <span>1 week ago</span>
+                                    }
+                                    else
+                                    {
+                                        <span>@weeksAgo weeks ago</span>
+                                    }
+                                </small>
+                            </dd>
+                            
+                            <dt class="col-sm-3 text-light">
+                                @Html.DisplayNameFor(model => model.PaymentMethod)
+                            </dt>
+                            <dd class="col-sm-9">
+                                @{
+                                    var methodBadge = Model.PaymentMethod switch
+                                    {
+                                        "Cash" => "badge badge-secondary",
+                                        "Credit Card" => "badge badge-primary",
+                                        "Bank Transfer" => "badge badge-info",
+                                        "Check" => "badge badge-warning",
+                                        "Online Payment" => "badge badge-success",
+                                        _ => "badge badge-light"
+                                    };
+                                }
+                                <div class="input-group" style="max-width: 300px;">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text bg-dark text-light border-dark">
+                                            <i class="fas fa-credit-card"></i>
+                                        </span>
+                                    </div>
+                                    <span class="form-control bg-dark text-light border-dark">
+                                        @Html.DisplayFor(model => model.PaymentMethod)
+                                    </span>
+                                </div>
+                                <div class="mt-1">
+                                    <span class="@methodBadge p-2">
+                                        <i class="fas fa-check-circle mr-1"></i> @Html.DisplayFor(model => model.PaymentMethod)
+                                    </span>
+                                </div>
+                            </dd>
+                            
+                            <dt class="col-sm-3 text-light">
+                                @Html.DisplayNameFor(model => model.Notes)
+                            </dt>
+                            <dd class="col-sm-9">
+                                @if (!string.IsNullOrEmpty(Model.Notes))
+                                {
+                                    <div class="text-light p-3" style="background-color: rgba(255,255,255,0.1); border-radius: 4px; min-height: 80px;">
+                                        @Html.DisplayFor(model => model.Notes)
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="text-muted p-3" style="background-color: rgba(255,255,255,0.05); border-radius: 4px; min-height: 80px;">
+                                        <i class="fas fa-sticky-note mr-2"></i> No notes provided for this payment
+                                    </div>
+                                }
+                            </dd>
+                        </dl>
+                    </div>
+                    <div class="card-footer">
+                        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">
+                            <i class="fas fa-edit"></i> Edit Payment
+                        </a>
+                        <a asp-action="Index" class="btn btn-default ml-2">Back to List</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@functions {
+    // Helper function to convert amount to words (basic implementation)
+    private string ConvertAmountToWords(decimal amount)
+    {
+        if (amount == 0) return "Zero dollars";
+        
+        var dollars = (int)Math.Floor(amount);
+        var cents = (int)((amount - dollars) * 100);
+        
+        var dollarsText = dollars == 1 ? "dollar" : "dollars";
+        var centsText = cents == 1 ? "cent" : "cents";
+        
+        if (cents > 0)
+        {
+            return $"{dollars:N0} {dollarsText} and {cents} {centsText}";
+        }
+        else
+        {
+            return $"{dollars:N0} {dollarsText}";
+        }
+    }
+}
+
+@section Scripts {
+    <script>
+        // Simple amount formatting if needed
+        document.addEventListener('DOMContentLoaded', function() {
+            // You can add any client-side functionality here if needed
+            console.log('Payment details loaded for ID: @Model.Id');
+        });
+    </script>
+}

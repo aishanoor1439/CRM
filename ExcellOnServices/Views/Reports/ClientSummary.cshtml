@@ -1,0 +1,79 @@
+﻿@model IEnumerable<ExcellOnServices.Models.Client>
+@{
+    ViewData["Title"] = "Client Summary Report";
+    var clientServices = ViewBag.ClientServices as List<ExcellOnServices.Models.ClientService>;
+}
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Client Information Summary</h3>
+            </div>
+            <div class="card-body" style="background-color:#271940;">
+                @if (Model.Any())
+                {
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Company Name</th>
+                                <th>Contact Person</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Status</th>
+                                <th>Services Used</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var client in Model)
+                            {
+                                var services = clientServices?.Where(cs => cs.ClientId == client.Id).ToList();
+                                <tr>
+                                    <td>@client.CompanyName</td>
+                                    <td>@client.ContactPerson</td>
+                                    <td>@client.Email</td>
+                                    <td>@client.Phone</td>
+                                    <td>
+                                        @if (client.IsActive)
+                                        {
+                                            <span class="badge badge-success">Active</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge badge-danger">Inactive</span>
+                                        }
+                                    </td>
+                                    <td>
+                                        @if (services != null && services.Any())
+                                        {
+                                            <ul class="list-unstyled mb-0">
+                                                @foreach (var service in services)
+                                                {
+                                                    <li>
+                                                        <span class="badge badge-info">@service.Service?.Name</span>
+                                                        <small class="text-muted">(@service.NumberOfEmployees employees)</small>
+                                                    </li>
+                                                }
+                                            </ul>
+                                        }
+                                        else
+                                        {
+                                            <span class="text-muted">No services assigned</span>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <div class="alert alert-info">
+                        <i class="icon fas fa-info"></i>
+                        No client data available.
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>

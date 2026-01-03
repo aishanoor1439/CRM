@@ -1,0 +1,148 @@
+﻿@model ExcellOnServices.Models.Employee
+
+@{
+ViewData["Title"] = "Add New Employee";
+}
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Employee Information</h3>
+                    </div>
+                    <form asp-action="Create" id="employeeForm">
+                        @Html.AntiForgeryToken()
+
+                        <div class="card-body" style="background-color:#271940;">
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label asp-for="FirstName" class="control-label"></label>
+                                        <input asp-for="FirstName" class="form-control"
+                                            placeholder="Enter first name" />
+                                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label asp-for="LastName" class="control-label"></label>
+                                        <input asp-for="LastName" class="form-control" placeholder="Enter last name" />
+                                        <span asp-validation-for="LastName" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label asp-for="Email" class="control-label"></label>
+                                        <input asp-for="Email" class="form-control"
+                                            placeholder="employee@excellon.com" />
+                                        <span asp-validation-for="Email" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label asp-for="Phone" class="control-label"></label>
+                                        <input asp-for="Phone" class="form-control" placeholder="+1 (555) 123-4567" />
+                                        <span asp-validation-for="Phone" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label asp-for="DepartmentId" class="control-label"></label>
+                                        <select asp-for="DepartmentId" class="form-control"
+                                            asp-items="ViewBag.Departments" data-val="false">
+                                            <option value="">-- Select Department (Optional) --</option>
+                                        </select>
+
+
+                                        <span asp-validation-for="DepartmentId" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label asp-for="ServiceId" class="control-label"></label>
+                                        <select asp-for="ServiceId" class="form-control" asp-items="ViewBag.Services"
+                                            data-val="false">
+                                            <option value="">-- Select Service (Optional) --</option>
+                                        </select>
+
+                                        <span asp-validation-for="ServiceId" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="Designation" class="control-label"></label>
+                                <input asp-for="Designation" class="form-control"
+                                    placeholder="e.g., Support Agent, Team Lead, Manager" />
+                                <span asp-validation-for="Designation" class="text-danger"></span>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label asp-for="HireDate" class="control-label"></label>
+                                        <input asp-for="HireDate" class="form-control" type="date" />
+                                        <span asp-validation-for="HireDate" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Status</label>
+                                        <div class="custom-control custom-switch mt-2">
+                                            <div class="custom-control custom-switch mt-2">
+                                                <input asp-for="IsActive" class="custom-control-input" />
+                                                <label asp-for="IsActive" class="custom-control-label"></label>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary">
+                                Create Employee
+                            </button>
+                            <a asp-action="Index" class="btn btn-default">Back to List</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-info">
+                    <div class="card-header">
+                        <h3 class="card-title">Employee Types</h3>
+                    </div>
+                    <div class="card-body" style="background-color:#271940;">
+                        <p>Employees can be assigned to:</p>
+                        <ul>
+                            <li><strong>In-bound Services:</strong> Technical Support, Customer Service</li>
+                            <li><strong>Out-bound Services:</strong> Customer follow-up, Satisfaction surveys</li>
+                            <li><strong>Tele Marketing:</strong> Sales and promotions</li>
+                        </ul>
+                        <div class="alert alert-info">
+                            <i class="icon fas fa-info"></i>
+                            Employees can work in different departments like HR, Administration, Service, etc.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@section Scripts {
+@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+<script>
+    $("#DepartmentId").removeData("val").removeData("val-required");
+    $("#ServiceId").removeData("val").removeData("val-required");
+</script>
+}

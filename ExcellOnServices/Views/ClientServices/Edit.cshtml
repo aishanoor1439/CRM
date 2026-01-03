@@ -1,0 +1,148 @@
+﻿@model ExcellOnServices.Models.ClientService
+
+@{
+    ViewData["Title"] = "Edit Service Assignment";
+}
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-warning">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            Edit Service Assignment
+                        </h3>
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <form asp-action="Edit" id="editForm">
+                        <div class="card-body" style="background-color:#271940;">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <input type="hidden" asp-for="Id" />
+                            
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label asp-for="ClientId" class="control-label text-light"></label>
+                                        <select asp-for="ClientId" class="form-control bg-dark text-light border-dark" asp-items="ViewBag.ClientId" required>
+                                            <option value="">-- Select Client --</option>
+                                        </select>
+                                        <span asp-validation-for="ClientId" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label asp-for="ServiceId" class="control-label text-light"></label>
+                                        <select asp-for="ServiceId" class="form-control bg-dark text-light border-dark" asp-items="ViewBag.ServiceId" required>
+                                            <option value="">-- Select Service --</option>
+                                        </select>
+                                        <span asp-validation-for="ServiceId" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label asp-for="StartDate" class="control-label text-light"></label>
+                                        <input asp-for="StartDate" 
+                                               class="form-control bg-dark text-light border-dark" 
+                                               type="date" 
+                                               value="@Model.StartDate.ToString("yyyy-MM-dd")" />
+                                        <span asp-validation-for="StartDate" class="text-danger"></span>
+                                        <small class="form-text text-muted">Service start date</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label asp-for="EndDate" class="control-label text-light"></label>
+                                        <input asp-for="EndDate" 
+                                               class="form-control bg-dark text-light border-dark" 
+                                               type="date"
+                                               value="@(Model.EndDate?.ToString("yyyy-MM-dd") ?? "")" />
+                                        <small class="form-text text-muted">Leave empty for ongoing service</small>
+                                        <span asp-validation-for="EndDate" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label asp-for="NumberOfEmployees" class="control-label text-light"></label>
+                                        <input asp-for="NumberOfEmployees" 
+                                               class="form-control bg-dark text-light border-dark" 
+                                               type="number" 
+                                               min="1" 
+                                               max="1000" />
+                                        <span asp-validation-for="NumberOfEmployees" class="text-danger"></span>
+                                        <small class="form-text text-muted">Number of employees assigned to this service</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label text-light">Status</label>
+                                        <div class="custom-control custom-switch mt-2">
+                                            <input type="checkbox" class="custom-control-input" id="isActiveSwitch" asp-for="IsActive">
+                                            <label class="custom-control-label text-light" for="isActiveSwitch">
+                                                <span id="statusLabel">@(Model.IsActive ? "Active Assignment" : "Inactive Assignment")</span>
+                                            </label>
+                                        </div>
+                                        <small class="form-text text-muted">Toggle to change assignment status</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary">
+                                Update Assignment
+                            </button>
+                            <a asp-action="Index" class="btn btn-default ml-2">Back to List</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    
+    <script>
+        // Update the switch label text
+        document.getElementById('isActiveSwitch').addEventListener('change', function() {
+            const label = document.getElementById('statusLabel');
+            if (this.checked) {
+                label.textContent = 'Active Assignment';
+            } else {
+                label.textContent = 'Inactive Assignment';
+            }
+        });
+        
+        // Fix for date inputs
+        document.addEventListener('DOMContentLoaded', function() {
+            // Format StartDate for date input
+            const startDateInput = document.querySelector('input[name="StartDate"]');
+            if (startDateInput && startDateInput.value) {
+                const date = new Date(startDateInput.value);
+                if (!isNaN(date.getTime())) {
+                    startDateInput.value = date.toISOString().split('T')[0];
+                }
+            }
+            
+            // Format EndDate for date input
+            const endDateInput = document.querySelector('input[name="EndDate"]');
+            if (endDateInput && endDateInput.value) {
+                const date = new Date(endDateInput.value);
+                if (!isNaN(date.getTime())) {
+                    endDateInput.value = date.toISOString().split('T')[0];
+                }
+            }
+        });
+    </script>
+}

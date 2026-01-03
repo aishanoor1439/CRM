@@ -1,0 +1,69 @@
+/* Site-specific overrides for fintech theme */
+
+/* Login/Register pages - make them use our theme */
+.login-box-msg,
+.register-box-msg {
+    color: var(--neon-blue) !important;
+    text-shadow: 0 0 10px rgba(0, 245, 255, 0.3) !important;
+}
+
+/* Form validation */
+.field-validation-error {
+    color: #ff3366 !important;
+    font-size: 0.875rem !important;
+}
+
+.input-validation-error {
+    border-color: #ff3366 !important;
+    background: rgba(255, 51, 102, 0.05) !important;
+}
+
+/* Table improvements */
+.table td, .table th {
+    vertical-align: middle !important;
+}
+
+/* Card improvements */
+.card .card-tools {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+}
+
+/* Button spacing */
+.btn-group-sm > .btn, .btn-sm {
+    padding: 0.25rem 0.5rem !important;
+}
+
+/* Modal styling */
+.modal-content {
+    background: rgba(255, 255, 255, 0.05) !important;
+    backdrop-filter: blur(20px) !important;
+    border: 1px solid rgba(0, 245, 255, 0.1) !important;
+    color: #fff !important;
+}
+
+.modal-header {
+    border-bottom: 1px solid rgba(0, 245, 255, 0.1) !important;
+}
+
+.modal-footer {
+    border-top: 1px solid rgba(0, 245, 255, 0.1) !important;
+}
+
+/* Dashboard specific */
+.dashboard-stats .small-box {
+    height: 100% !important;
+}
+
+/* Print styles */
+@media print {
+    .no-print, .no-print * {
+        display: none !important;
+    }
+
+    .card {
+        border: 1px solid #000 !important;
+        box-shadow: none !important;
+    }
+}

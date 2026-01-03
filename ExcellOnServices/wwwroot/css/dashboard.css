@@ -1,0 +1,334 @@
+/* ===== DASHBOARD THEME - MATCHING FINTECH LANDING PAGE ===== */
+
+/* CSS Variables matching Landing Page */
+:root {
+    /* Landing Page Colors */
+    --deep-purple: #10002b;
+    --deep-blue: #0a0e2e;
+    --neon-blue: #00f5ff;
+    --neon-purple: #9d4edd;
+    --glow-blue: rgba(0, 245, 255, 0.7);
+    --glow-purple: rgba(157, 78, 221, 0.7);
+    /* Additional Dashboard Colors */
+    --card-bg: rgba(255, 255, 255, 0.05);
+    --card-border: rgba(0, 245, 255, 0.15);
+    --sidebar-bg: rgba(16, 0, 43, 0.9);
+    --navbar-bg: rgba(16, 0, 43, 0.85);
+}
+
+/* Body - Match Landing Page Gradient */
+body.hold-transition {
+    background: linear-gradient(135deg, var(--deep-purple) 0%, var(--deep-blue) 50%, #000814 100%) !important;
+    font-family: 'Inter', 'Poppins', sans-serif !important;
+    color: #fff !important;
+    min-height: 100vh;
+}
+
+/* Sidebar - Glass Morphism */
+.main-sidebar {
+    background: var(--sidebar-bg) !important;
+    backdrop-filter: blur(15px) !important;
+    border-right: 1px solid rgba(0, 245, 255, 0.2) !important;
+}
+
+.brand-link {
+    background: rgba(255, 255, 255, 0.05) !important;
+    backdrop-filter: blur(10px) !important;
+    border-bottom: 1px solid rgba(0, 245, 255, 0.15) !important;
+}
+
+.brand-text {
+    font-family: 'Orbitron', sans-serif !important;
+    font-weight: 700 !important;
+    color: var(--neon-blue) !important;
+    text-shadow: 0 0 15px var(--neon-blue) !important;
+    letter-spacing: 1px !important;
+}
+
+/* Sidebar Navigation */
+.sidebar-dark-primary .nav-sidebar > .nav-item > .nav-link.active,
+.sidebar-dark-primary .nav-sidebar > .nav-item > .nav-link:focus,
+.sidebar-dark-primary .nav-sidebar > .nav-item > .nav-link:hover {
+    background: linear-gradient(90deg, rgba(0, 245, 255, 0.2), rgba(157, 78, 221, 0.1)) !important;
+    border-left: 3px solid var(--neon-blue) !important;
+    color: var(--neon-blue) !important;
+}
+
+.nav-sidebar .nav-link > p,
+.nav-sidebar .nav-link > i {
+    color: rgba(255, 255, 255, 0.85) !important;
+    transition: all 0.3s ease !important;
+}
+
+.nav-sidebar .nav-link:hover > p,
+.nav-sidebar .nav-link:hover > i {
+    color: var(--neon-blue) !important;
+    text-shadow: 0 0 10px var(--neon-blue) !important;
+}
+
+/* Navbar */
+.main-header {
+    background: var(--navbar-bg) !important;
+    backdrop-filter: blur(15px) !important;
+    border-bottom: 1px solid rgba(0, 245, 255, 0.15) !important;
+}
+
+.navbar-white {
+    background: transparent !important;
+}
+
+.navbar-nav .nav-link {
+    transition: all 0.3s ease !important;
+}
+
+    .navbar-nav .nav-link:hover {
+        color: var(--neon-blue) !important;
+        text-shadow: 0 0 10px var(--neon-blue) !important;
+    }
+
+/* Cards - Glass Morphism like Landing Page */
+.card {
+    background: var(--card-bg) !important;
+    backdrop-filter: blur(15px) !important;
+    border: 1px solid var(--card-border) !important;
+    border-radius: 15px !important;
+    color: #fff !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2) !important;
+}
+
+    .card:hover {
+        border-color: rgba(0, 245, 255, 0.3) !important;
+        box-shadow: 0 12px 40px rgba(0, 245, 255, 0.15) !important;
+        transform: translateY(-5px) !important;
+    }
+
+.card-header {
+    background: rgba(255, 255, 255, 0.05) !important;
+    border-bottom: 1px solid rgba(0, 245, 255, 0.15) !important;
+    border-radius: 15px 15px 0 0 !important;
+}
+
+.card-title {
+    color: var(--neon-blue) !important;
+    font-family: 'Orbitron', sans-serif !important;
+    font-weight: 600 !important;
+    text-shadow: 0 0 10px rgba(0, 245, 255, 0.3) !important;
+}
+
+/* Tables */
+.table {
+    color: rgba(255, 255, 255, 0.9) !important;
+    background: transparent !important;
+}
+
+.table-bordered {
+    border: 1px solid rgba(0, 245, 255, 0.1) !important;
+}
+
+    .table-bordered th,
+    .table-bordered td {
+        border: 1px solid rgba(0, 245, 255, 0.1) !important;
+    }
+
+.table-hover tbody tr:hover {
+    background: rgba(0, 245, 255, 0.1) !important;
+    color: var(--neon-blue) !important;
+}
+
+/* Buttons - Match Landing Page Style */
+.btn {
+    border-radius: 8px !important;
+    font-weight: 600 !important;
+    transition: all 0.3s ease !important;
+    border: none !important;
+    position: relative !important;
+    overflow: hidden !important;
+}
+
+.btn-primary {
+    background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple)) !important;
+    color: #000 !important;
+    box-shadow: 0 5px 20px rgba(0, 245, 255, 0.3) !important;
+}
+
+    .btn-primary:hover {
+        transform: translateY(-3px) !important;
+        box-shadow: 0 8px 25px rgba(0, 245, 255, 0.4) !important;
+    }
+
+.btn-info {
+    background: linear-gradient(45deg, #00d4ff, #0099ff) !important;
+    color: #000 !important;
+}
+
+.btn-success {
+    background: linear-gradient(45deg, #00ff88, #00cc66) !important;
+    color: #000 !important;
+}
+
+.btn-warning {
+    background: linear-gradient(45deg, #ffaa00, #ff7700) !important;
+    color: #000 !important;
+}
+
+.btn-danger {
+    background: linear-gradient(45deg, #ff3366, #cc0044) !important;
+    color: #fff !important;
+}
+
+/* Small Box Widgets */
+.small-box {
+    border-radius: 15px !important;
+    background: var(--card-bg) !important;
+    backdrop-filter: blur(10px) !important;
+    border: 1px solid var(--card-border) !important;
+    color: #fff !important;
+    transition: all 0.3s ease !important;
+    overflow: hidden !important;
+}
+
+    .small-box:hover {
+        transform: translateY(-10px) !important;
+        border-color: rgba(0, 245, 255, 0.3) !important;
+        box-shadow: 0 15px 40px rgba(0, 245, 255, 0.2) !important;
+    }
+
+    .small-box .icon {
+        color: rgba(255, 255, 255, 0.2) !important;
+        transition: all 0.3s ease !important;
+    }
+
+    .small-box:hover .icon {
+        color: rgba(0, 245, 255, 0.3) !important;
+        transform: scale(1.1) !important;
+    }
+
+.small-box-footer {
+    background: rgba(0, 0, 0, 0.2) !important;
+    color: var(--neon-blue) !important;
+}
+
+/* Form Controls */
+.form-control {
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(0, 245, 255, 0.2) !important;
+    color: #fff !important;
+    border-radius: 8px !important;
+    transition: all 0.3s ease !important;
+}
+
+    .form-control:focus {
+        background: rgba(255, 255, 255, 0.08) !important;
+        border-color: var(--neon-blue) !important;
+        box-shadow: 0 0 0 0.2rem rgba(0, 245, 255, 0.25) !important;
+        color: #fff !important;
+    }
+
+    .form-control::placeholder {
+        color: rgba(255, 255, 255, 0.4) !important;
+    }
+
+/* Badges */
+.badge {
+    border-radius: 10px !important;
+    padding: 5px 12px !important;
+    font-weight: 600 !important;
+}
+
+.badge-success {
+    background: linear-gradient(45deg, #00ff88, #00cc66) !important;
+}
+
+.badge-danger {
+    background: linear-gradient(45deg, #ff3366, #cc0044) !important;
+}
+
+.badge-warning {
+    background: linear-gradient(45deg, #ffaa00, #ff7700) !important;
+}
+
+.badge-info {
+    background: linear-gradient(45deg, #00d4ff, #0099ff) !important;
+}
+
+/* Alerts */
+.alert {
+    border-radius: 10px !important;
+    border: none !important;
+    backdrop-filter: blur(10px) !important;
+}
+
+.alert-info {
+    background: rgba(0, 245, 255, 0.1) !important;
+    color: var(--neon-blue) !important;
+    border-left: 4px solid var(--neon-blue) !important;
+}
+
+.alert-success {
+    background: rgba(0, 255, 136, 0.1) !important;
+    color: #00ff88 !important;
+    border-left: 4px solid #00ff88 !important;
+}
+
+.alert-warning {
+    background: rgba(255, 170, 0, 0.1) !important;
+    color: #ffaa00 !important;
+    border-left: 4px solid #ffaa00 !important;
+}
+
+.alert-danger {
+    background: rgba(255, 51, 102, 0.1) !important;
+    color: #ff3366 !important;
+    border-left: 4px solid #ff3366 !important;
+}
+
+/* Footer */
+.main-footer {
+    background: var(--navbar-bg) !important;
+    backdrop-filter: blur(15px) !important;
+    border-top: 1px solid rgba(0, 245, 255, 0.15) !important;
+    color: rgba(255, 255, 255, 0.7) !important;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
+    border-radius: 5px;
+}
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: linear-gradient(45deg, var(--neon-purple), var(--neon-blue));
+    }
+
+/* Login/Register Pages */
+.login-page,
+.register-page {
+    background: linear-gradient(135deg, var(--deep-purple) 0%, var(--deep-blue) 50%, #000814 100%) !important;
+}
+
+.login-box,
+.register-box {
+    background: rgba(255, 255, 255, 0.05) !important;
+    backdrop-filter: blur(20px) !important;
+    border: 1px solid rgba(0, 245, 255, 0.1) !important;
+    border-radius: 20px !important;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3) !important;
+    color: #fff !important;
+}
+
+.login-logo a,
+.register-logo a {
+    color: var(--neon-blue) !important;
+    font-family: 'Orbitron', sans-serif !important;
+    font-weight: 700 !important;
+    text-shadow: 0 0 15px var(--neon-blue) !important;
+}

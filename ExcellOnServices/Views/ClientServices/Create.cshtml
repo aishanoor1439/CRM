@@ -1,0 +1,162 @@
+﻿@model ExcellOnServices.Models.ClientService
+
+@{
+    ViewData["Title"] = "Assign Service to Client";
+}
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Service Assignment Details</h3>
+                    </div>
+                    <form asp-action="Create" id="createForm">
+                        <div class="card-body" style="background-color:#271940;">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label asp-for="ClientId" class="control-label text-light"></label>
+                                        <select asp-for="ClientId" class="form-control bg-dark text-light border-dark" asp-items="ViewBag.ClientId" required>
+                                            <option value="">-- Select Client --</option>
+                                        </select>
+                                        <span asp-validation-for="ClientId" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label asp-for="ServiceId" class="control-label text-light"></label>
+                                        <select asp-for="ServiceId" class="form-control bg-dark text-light border-dark" asp-items="ViewBag.ServiceId" required>
+                                            <option value="">-- Select Service --</option>
+                                        </select>
+                                        <span asp-validation-for="ServiceId" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label asp-for="StartDate" class="control-label text-light"></label>
+                                        <input asp-for="StartDate" 
+                                               class="form-control bg-dark text-light border-dark" 
+                                               type="date" 
+                                               value="@DateTime.Now.ToString("yyyy-MM-dd")"
+                                               required />
+                                        <span asp-validation-for="StartDate" class="text-danger"></span>
+                                        <small class="form-text text-muted">Service start date</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label asp-for="EndDate" class="control-label text-light"></label>
+                                        <input asp-for="EndDate" 
+                                               class="form-control bg-dark text-light border-dark" 
+                                               type="date" />
+                                        <small class="form-text text-muted">Leave empty for ongoing service</small>
+                                        <span asp-validation-for="EndDate" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label asp-for="NumberOfEmployees" class="control-label text-light"></label>
+                                        <input asp-for="NumberOfEmployees" 
+                                               class="form-control bg-dark text-light border-dark" 
+                                               type="number" 
+                                               min="1" 
+                                               max="1000" 
+                                               value="1" 
+                                               required />
+                                        <span asp-validation-for="NumberOfEmployees" class="text-danger"></span>
+                                        <small class="form-text text-muted">Number of employees assigned to this service</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label text-light">Status</label>
+                                        <div class="custom-control custom-switch mt-2">
+                                            <input type="checkbox" class="custom-control-input" id="isActiveSwitch" asp-for="IsActive" checked>
+                                            <label class="custom-control-label text-light" for="isActiveSwitch">
+                                                <span id="statusLabel">Active Assignment</span>
+                                            </label>
+                                        </div>
+                                        <small class="form-text text-muted">Toggle to change assignment status</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-plus"></i> Assign Service
+                            </button>
+                            <a asp-action="Index" class="btn btn-default ml-2">Back to List</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-info">
+                    <div class="card-header">
+                        <h3 class="card-title">Charge Calculation</h3>
+                    </div>
+                    <div class="card-body" style="background-color:#271940;">
+                        <p class="text-light">Daily charges are calculated as:</p>
+                        <p class="text-center text-light">
+                            <strong>Service Charge × Number of Employees</strong>
+                        </p>
+                        <p class="text-light">Example:</p>
+                        <ul class="text-light">
+                            <li>In-bound: $4,500 × 5 employees = $22,500/day</li>
+                            <li>Out-bound: $6,000 × 3 employees = $18,000/day</li>
+                            <li>Tele Marketing: $5,500 × 4 employees = $22,000/day</li>
+                        </ul>
+                        <div class="alert alert-info">
+                            <i class="icon fas fa-calculator"></i>
+                            These calculations are used for billing clients.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    
+    <script>
+        // Update the switch label text
+        document.getElementById('isActiveSwitch').addEventListener('change', function() {
+            const label = document.getElementById('statusLabel');
+            if (this.checked) {
+                label.textContent = 'Active Assignment';
+            } else {
+                label.textContent = 'Inactive Assignment';
+            }
+        });
+        
+        // Fix for date inputs
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set default date for StartDate if empty
+            const startDateInput = document.querySelector('input[name="StartDate"]');
+            if (startDateInput && !startDateInput.value) {
+                startDateInput.value = new Date().toISOString().split('T')[0];
+            }
+            
+            // Initialize status label
+            const switchElement = document.getElementById('isActiveSwitch');
+            const statusLabel = document.getElementById('statusLabel');
+            if (switchElement.checked) {
+                statusLabel.textContent = 'Active Assignment';
+            } else {
+                statusLabel.textContent = 'Inactive Assignment';
+            }
+        });
+    </script>
+}

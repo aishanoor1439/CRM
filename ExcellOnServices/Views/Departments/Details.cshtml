@@ -1,0 +1,58 @@
+﻿@model ExcellOnServices.Models.Department
+
+@{
+    ViewData["Title"] = "Department Details";
+}
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 mx-auto">
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Department Details</h3>
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body" style="background-color:#271940;">
+                        <dl class="row">
+                            <dt class="col-sm-3 text-light">
+                                @Html.DisplayNameFor(model => model.Name)
+                            </dt>
+                            <dd class="col-sm-9">
+                                <span class="form-control-plaintext text-light font-weight-bold">@Html.DisplayFor(model => model.Name)</span>
+                            </dd>
+                            
+                            <dt class="col-sm-3 text-light">
+                                @Html.DisplayNameFor(model => model.Description)
+                            </dt>
+                            <dd class="col-sm-9">
+                                <div class="text-light p-2" style="background-color: rgba(255,255,255,0.1); border-radius: 4px;">
+                                    @Html.DisplayFor(model => model.Description)
+                                </div>
+                            </dd>
+                            
+                            <dt class="col-sm-3 text-light">
+                                @Html.DisplayNameFor(model => model.CreatedDate)
+                            </dt>
+                            <dd class="col-sm-9">
+                                <span class="form-control-plaintext text-light">
+                                    <i class="far fa-calendar-alt mr-2"></i>@Model.CreatedDate.ToString("MMMM dd, yyyy")
+                                </span>
+                            </dd>
+                        </dl>
+                    </div>
+                    <div class="card-footer">
+                        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">
+                            <i class="fas fa-edit"></i> Edit Department
+                        </a>
+                        <a asp-action="Index" class="btn btn-default ml-2">Back to List</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

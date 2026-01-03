@@ -1,0 +1,66 @@
+﻿@model ExcellOnServices.Models.Department
+
+@{
+    ViewData["Title"] = "Add New Department";
+}
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Department Information</h3>
+                    </div>
+                    <form asp-action="Create">
+                        <div class="card-body"  style="background-color:#271940;">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="form-group">
+                                <label asp-for="Name" class="control-label"></label>
+                                <input asp-for="Name" class="form-control" placeholder="Enter department name" />
+                                <span asp-validation-for="Name" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Description" class="control-label"></label>
+                                <textarea asp-for="Description" class="form-control" rows="4" placeholder="Enter department description"></textarea>
+                                <span asp-validation-for="Description" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary">
+                                Create Department
+                            </button>
+                            <a asp-action="Index" class="btn btn-default">Back to List</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-info">
+                    <div class="card-header">
+                        <h3 class="card-title">Standard Departments</h3>
+                    </div>
+                    <div class="card-body" style="background-color:#271940;">
+                        <p>Standard departments at ExcellOn:</p>
+                        <ul>
+                            <li>HR Management</li>
+                            <li>Administration</li>
+                            <li>Service</li>
+                            <li>Training</li>
+                            <li>Internet Security</li>
+                            <li>Auditors</li>
+                        </ul>
+                        <div class="alert alert-info">
+                            <i class="icon fas fa-info"></i>
+                            These are the main departments mentioned in requirements.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

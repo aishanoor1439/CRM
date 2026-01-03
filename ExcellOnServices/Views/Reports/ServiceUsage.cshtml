@@ -1,0 +1,61 @@
+﻿@model IEnumerable<ExcellOnServices.Controllers.ServiceUsageReport>
+
+@{
+    ViewData["Title"] = "Service Usage Report";
+}
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Service Utilization by Clients</h3>
+            </div>
+            <div class="card-body" style="background-color:#271940;>
+                @if (Model.Any())
+                {
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Service Name</th>
+                                <th>Number of Clients</th>
+                                <th>Total Employees Assigned</th>
+                                <th>Popularity</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var report in Model)
+                            {
+                                <tr>
+                                    <td>@report.ServiceName</td>
+                                    <td>@report.ClientCount</td>
+                                    <td>@report.TotalEmployees</td>
+                                    <td>
+                                        @if (report.ClientCount >= 3)
+                                        {
+                                            <span class="badge badge-success">High</span>
+                                        }
+                                        else if (report.ClientCount >= 1)
+                                        {
+                                            <span class="badge badge-warning">Medium</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge badge-danger">Low</span>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <div class="alert alert-info">
+                        <i class="icon fas fa-info"></i>
+                        No service usage data available.
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>

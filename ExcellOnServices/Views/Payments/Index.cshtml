@@ -1,0 +1,100 @@
+﻿@model IEnumerable<ExcellOnServices.Models.Payment>
+
+@{
+    ViewData["Title"] = "Payments";
+}
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Payment Records</h3>
+                        <div class="card-tools">
+                            <a asp-action="Create" class="btn btn-primary btn-sm">
+                                <i class="fas fa-plus"></i> Add New Payment
+                            </a>
+                        </div>
+                    </div>
+                    <div class="card-body" style="background-color:#271940;">
+                        <table class="table table-bordered table-hover text-light">
+                            <thead>
+                                <tr>
+                                    <th>Client</th>
+                                    <th>Amount</th>
+                                    <th>Payment Method</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            <strong>@item.Client?.CompanyName</strong>
+                                            @if (!string.IsNullOrEmpty(item.Client?.ContactPerson))
+                                            {
+                                                <br />
+                                                <small class="text-muted">@item.Client.ContactPerson</small>
+                                            }
+                                        </td>
+                                        <td>
+                                            <span class="badge badge-success p-2 font-weight-bold">
+                                                $@Html.DisplayFor(modelItem => item.Amount)
+                                            </span>
+                                        </td>
+                                        <td>
+                                            @{
+                                                var methodBadge = item.PaymentMethod switch
+                                                {
+                                                    "Cash" => "badge badge-secondary",
+                                                    "Credit Card" => "badge badge-primary",
+                                                    "Bank Transfer" => "badge badge-info",
+                                                    "Check" => "badge badge-warning",
+                                                    "Online" => "badge badge-success",
+                                                    _ => "badge badge-light"
+                                                };
+                                            }
+                                            <span class="@methodBadge p-1">
+                                                @Html.DisplayFor(modelItem => item.PaymentMethod)
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-xs btn-warning">
+                                                <i class="fas fa-edit"></i> Edit
+                                            </a>
+                                            <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-xs btn-info">
+                                                <i class="fas fa-eye"></i> Details
+                                            </a>
+                                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-xs btn-danger">
+                                                <i class="fas fa-trash"></i> Delete
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p class="mb-0" style="color:#271940;">
+                                    <strong>Total Payments:</strong> @Model.Count()
+                                </p>
+                            </div>
+                            <div class="col-md-6 text-right">
+                                @{
+                                    var totalAmount = Model.Sum(p => p.Amount);
+                                }
+                                <p class="mb-0" style="color:#271940;">
+                                    <strong>Total Amount:</strong> $@totalAmount.ToString("N2")
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

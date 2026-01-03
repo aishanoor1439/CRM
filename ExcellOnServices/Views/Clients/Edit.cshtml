@@ -1,0 +1,138 @@
+﻿@model ExcellOnServices.Models.Client
+
+@{
+    ViewData["Title"] = "Edit Client";
+}
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-warning">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            Edit Client Information
+                        </h3>
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <form asp-action="Edit" id="editForm">
+                        <div class="card-body" style="background-color:#271940;">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <input type="hidden" asp-for="Id" />
+                            
+                            <div class="form-group">
+                                <label asp-for="CompanyName" class="control-label text-light"></label>
+                                <input asp-for="CompanyName" class="form-control bg-dark text-light border-dark" placeholder="Enter company name" />
+                                <span asp-validation-for="CompanyName" class="text-danger"></span>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label asp-for="ContactPerson" class="control-label text-light"></label>
+                                <input asp-for="ContactPerson" class="form-control bg-dark text-light border-dark" placeholder="Enter contact person name" />
+                                <span asp-validation-for="ContactPerson" class="text-danger"></span>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label asp-for="Email" class="control-label text-light"></label>
+                                        <input asp-for="Email" type="email" class="form-control bg-dark text-light border-dark" placeholder="contact@company.com" />
+                                        <span asp-validation-for="Email" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label asp-for="Phone" class="control-label text-light"></label>
+                                        <input asp-for="Phone" type="tel" class="form-control bg-dark text-light border-dark" placeholder="+1 (555) 123-4567" />
+                                        <span asp-validation-for="Phone" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label asp-for="Address" class="control-label text-light"></label>
+                                <textarea asp-for="Address" class="form-control bg-dark text-light border-dark" rows="3" placeholder="Enter company address"></textarea>
+                                <span asp-validation-for="Address" class="text-danger"></span>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label asp-for="RegistrationDate" class="control-label text-light"></label>
+                                        <input asp-for="RegistrationDate" 
+                                               type="date" 
+                                               class="form-control bg-dark text-light border-dark"
+                                               value="@Model.RegistrationDate.ToString("yyyy-MM-dd")" />
+                                        <span asp-validation-for="RegistrationDate" class="text-danger"></span>
+                                        <small class="form-text text-muted">Date when client registered</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label text-light">Status</label>
+                                        <div class="custom-control custom-switch mt-2">
+                                            <input type="checkbox" class="custom-control-input" id="isActiveSwitch" asp-for="IsActive">
+                                            <label class="custom-control-label text-light" for="isActiveSwitch">
+                                                @(Model.IsActive ? "Active Client" : "Inactive Client")
+                                            </label>
+                                        </div>
+                                        <small class="form-text text-muted">Toggle to change client status</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary">
+                                Update Client
+                            </button>
+                            <a asp-action="Index" class="btn btn-default ml-2">Back to List</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    
+    <script>
+        // Update the switch label text based on current state
+        document.addEventListener('DOMContentLoaded', function() {
+            const switchElement = document.getElementById('isActiveSwitch');
+            if (switchElement) {
+                const label = switchElement.nextElementSibling;
+                
+                // Initial setup
+                if (switchElement.checked) {
+                    label.textContent = 'Active Client';
+                } else {
+                    label.textContent = 'Inactive Client';
+                }
+                
+                // Add change event
+                switchElement.addEventListener('change', function() {
+                    if (this.checked) {
+                        label.textContent = 'Active Client';
+                    } else {
+                        label.textContent = 'Inactive Client';
+                    }
+                });
+            }
+            
+            // Format date for date input
+            const registrationDateInput = document.querySelector('input[name="RegistrationDate"]');
+            if (registrationDateInput && registrationDateInput.value) {
+                const date = new Date(registrationDateInput.value);
+                if (!isNaN(date.getTime())) {
+                    registrationDateInput.value = date.toISOString().split('T')[0];
+                }
+            }
+        });
+    </script>
+}

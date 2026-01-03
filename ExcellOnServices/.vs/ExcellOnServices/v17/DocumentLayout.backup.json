@@ -1,0 +1,190 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\aisha_ppxjc2l\\OneDrive\\Documents\\My Web Sites\\ExcellOnServices\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{F5580DA1-CB27-4CFB-A614-D771A26F891D}|ExcellOnServices.csproj|c:\\users\\aisha_ppxjc2l\\onedrive\\documents\\my web sites\\excellonservices\\views\\payments\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{F5580DA1-CB27-4CFB-A614-D771A26F891D}|ExcellOnServices.csproj|solutionrelative:views\\payments\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F5580DA1-CB27-4CFB-A614-D771A26F891D}|ExcellOnServices.csproj|c:\\users\\aisha_ppxjc2l\\onedrive\\documents\\my web sites\\excellonservices\\views\\employees\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{F5580DA1-CB27-4CFB-A614-D771A26F891D}|ExcellOnServices.csproj|solutionrelative:views\\employees\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F5580DA1-CB27-4CFB-A614-D771A26F891D}|ExcellOnServices.csproj|c:\\users\\aisha_ppxjc2l\\onedrive\\documents\\my web sites\\excellonservices\\views\\payments\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{F5580DA1-CB27-4CFB-A614-D771A26F891D}|ExcellOnServices.csproj|solutionrelative:views\\payments\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F5580DA1-CB27-4CFB-A614-D771A26F891D}|ExcellOnServices.csproj|c:\\users\\aisha_ppxjc2l\\onedrive\\documents\\my web sites\\excellonservices\\views\\payments\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{F5580DA1-CB27-4CFB-A614-D771A26F891D}|ExcellOnServices.csproj|solutionrelative:views\\payments\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F5580DA1-CB27-4CFB-A614-D771A26F891D}|ExcellOnServices.csproj|c:\\users\\aisha_ppxjc2l\\onedrive\\documents\\my web sites\\excellonservices\\views\\employees\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{F5580DA1-CB27-4CFB-A614-D771A26F891D}|ExcellOnServices.csproj|solutionrelative:views\\employees\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F5580DA1-CB27-4CFB-A614-D771A26F891D}|ExcellOnServices.csproj|c:\\users\\aisha_ppxjc2l\\onedrive\\documents\\my web sites\\excellonservices\\views\\payments\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{F5580DA1-CB27-4CFB-A614-D771A26F891D}|ExcellOnServices.csproj|solutionrelative:views\\payments\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F5580DA1-CB27-4CFB-A614-D771A26F891D}|ExcellOnServices.csproj|c:\\users\\aisha_ppxjc2l\\onedrive\\documents\\my web sites\\excellonservices\\views\\employees\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{F5580DA1-CB27-4CFB-A614-D771A26F891D}|ExcellOnServices.csproj|solutionrelative:views\\employees\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F5580DA1-CB27-4CFB-A614-D771A26F891D}|ExcellOnServices.csproj|c:\\users\\aisha_ppxjc2l\\onedrive\\documents\\my web sites\\excellonservices\\controllers\\paymentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F5580DA1-CB27-4CFB-A614-D771A26F891D}|ExcellOnServices.csproj|solutionrelative:controllers\\paymentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F5580DA1-CB27-4CFB-A614-D771A26F891D}|ExcellOnServices.csproj|c:\\users\\aisha_ppxjc2l\\onedrive\\documents\\my web sites\\excellonservices\\views\\payments\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{F5580DA1-CB27-4CFB-A614-D771A26F891D}|ExcellOnServices.csproj|solutionrelative:views\\payments\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F5580DA1-CB27-4CFB-A614-D771A26F891D}|ExcellOnServices.csproj|c:\\users\\aisha_ppxjc2l\\onedrive\\documents\\my web sites\\excellonservices\\models\\payment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F5580DA1-CB27-4CFB-A614-D771A26F891D}|ExcellOnServices.csproj|solutionrelative:models\\payment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Delete.cshtml",
+              "DocumentMoniker": "C:\\Users\\aisha_ppxjc2l\\OneDrive\\Documents\\My Web Sites\\ExcellOnServices\\Views\\Employees\\Delete.cshtml",
+              "RelativeDocumentMoniker": "Views\\Employees\\Delete.cshtml",
+              "ToolTip": "C:\\Users\\aisha_ppxjc2l\\OneDrive\\Documents\\My Web Sites\\ExcellOnServices\\Views\\Employees\\Delete.cshtml",
+              "RelativeToolTip": "Views\\Employees\\Delete.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-01-03T13:12:07.543Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Delete.cshtml",
+              "DocumentMoniker": "C:\\Users\\aisha_ppxjc2l\\OneDrive\\Documents\\My Web Sites\\ExcellOnServices\\Views\\Payments\\Delete.cshtml",
+              "RelativeDocumentMoniker": "Views\\Payments\\Delete.cshtml",
+              "ToolTip": "C:\\Users\\aisha_ppxjc2l\\OneDrive\\Documents\\My Web Sites\\ExcellOnServices\\Views\\Payments\\Delete.cshtml",
+              "RelativeToolTip": "Views\\Payments\\Delete.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAABMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-01-03T13:09:08.852Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Details.cshtml",
+              "DocumentMoniker": "C:\\Users\\aisha_ppxjc2l\\OneDrive\\Documents\\My Web Sites\\ExcellOnServices\\Views\\Payments\\Details.cshtml",
+              "RelativeDocumentMoniker": "Views\\Payments\\Details.cshtml",
+              "ToolTip": "C:\\Users\\aisha_ppxjc2l\\OneDrive\\Documents\\My Web Sites\\ExcellOnServices\\Views\\Payments\\Details.cshtml",
+              "RelativeToolTip": "Views\\Payments\\Details.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-01-03T13:07:00.49Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Edit.cshtml",
+              "DocumentMoniker": "C:\\Users\\aisha_ppxjc2l\\OneDrive\\Documents\\My Web Sites\\ExcellOnServices\\Views\\Payments\\Edit.cshtml",
+              "RelativeDocumentMoniker": "Views\\Payments\\Edit.cshtml",
+              "ToolTip": "C:\\Users\\aisha_ppxjc2l\\OneDrive\\Documents\\My Web Sites\\ExcellOnServices\\Views\\Payments\\Edit.cshtml",
+              "RelativeToolTip": "Views\\Payments\\Edit.cshtml",
+              "ViewState": "AgIAAEgAAAAAAAAAAAAAAFMAAABIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-01-03T13:02:17.838Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Edit.cshtml",
+              "DocumentMoniker": "C:\\Users\\aisha_ppxjc2l\\OneDrive\\Documents\\My Web Sites\\ExcellOnServices\\Views\\Employees\\Edit.cshtml",
+              "RelativeDocumentMoniker": "Views\\Employees\\Edit.cshtml",
+              "ToolTip": "C:\\Users\\aisha_ppxjc2l\\OneDrive\\Documents\\My Web Sites\\ExcellOnServices\\Views\\Employees\\Edit.cshtml",
+              "RelativeToolTip": "Views\\Employees\\Edit.cshtml",
+              "ViewState": "AgIAAG0AAAAAAAAAAADwv4kAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-01-03T12:59:28.441Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\aisha_ppxjc2l\\OneDrive\\Documents\\My Web Sites\\ExcellOnServices\\Views\\Employees\\Index.cshtml",
+              "RelativeDocumentMoniker": "Views\\Employees\\Index.cshtml",
+              "ToolTip": "C:\\Users\\aisha_ppxjc2l\\OneDrive\\Documents\\My Web Sites\\ExcellOnServices\\Views\\Employees\\Index.cshtml",
+              "RelativeToolTip": "Views\\Employees\\Index.cshtml",
+              "ViewState": "AgIAACoAAAAAAAAAAAAAADsAAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-01-03T12:56:38.939Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\aisha_ppxjc2l\\OneDrive\\Documents\\My Web Sites\\ExcellOnServices\\Views\\Payments\\Index.cshtml",
+              "RelativeDocumentMoniker": "Views\\Payments\\Index.cshtml",
+              "ToolTip": "C:\\Users\\aisha_ppxjc2l\\OneDrive\\Documents\\My Web Sites\\ExcellOnServices\\Views\\Payments\\Index.cshtml",
+              "RelativeToolTip": "Views\\Payments\\Index.cshtml",
+              "ViewState": "AgIAAE4AAAAAAAAAAAAAAD0AAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-01-03T12:54:44.179Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "PaymentsController.cs",
+              "DocumentMoniker": "C:\\Users\\aisha_ppxjc2l\\OneDrive\\Documents\\My Web Sites\\ExcellOnServices\\Controllers\\PaymentsController.cs",
+              "RelativeDocumentMoniker": "Controllers\\PaymentsController.cs",
+              "ToolTip": "C:\\Users\\aisha_ppxjc2l\\OneDrive\\Documents\\My Web Sites\\ExcellOnServices\\Controllers\\PaymentsController.cs",
+              "RelativeToolTip": "Controllers\\PaymentsController.cs",
+              "ViewState": "AgIAAPcAAAAAAAAAAADwvxMBAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-03T12:23:14.386Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Payment.cs",
+              "DocumentMoniker": "C:\\Users\\aisha_ppxjc2l\\OneDrive\\Documents\\My Web Sites\\ExcellOnServices\\Models\\Payment.cs",
+              "RelativeDocumentMoniker": "Models\\Payment.cs",
+              "ToolTip": "C:\\Users\\aisha_ppxjc2l\\OneDrive\\Documents\\My Web Sites\\ExcellOnServices\\Models\\Payment.cs",
+              "RelativeToolTip": "Models\\Payment.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAADwvygAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-03T12:22:54.627Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "C:\\Users\\aisha_ppxjc2l\\OneDrive\\Documents\\My Web Sites\\ExcellOnServices\\Views\\Payments\\Create.cshtml",
+              "RelativeDocumentMoniker": "Views\\Payments\\Create.cshtml",
+              "ToolTip": "C:\\Users\\aisha_ppxjc2l\\OneDrive\\Documents\\My Web Sites\\ExcellOnServices\\Views\\Payments\\Create.cshtml",
+              "RelativeToolTip": "Views\\Payments\\Create.cshtml",
+              "ViewState": "AgIAAKcAAAAAAAAAAADwv8MAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-01-03T12:05:54.434Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

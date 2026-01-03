@@ -1,0 +1,139 @@
+﻿@model ExcellOnServices.Models.Payment
+
+@{
+    ViewData["Title"] = "Edit Payment";
+}
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-warning">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            Edit Payment Record
+                        </h3>
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <form asp-action="Edit">
+                        <div class="card-body" style="background-color:#271940;">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <input type="hidden" asp-for="Id" />
+                            
+                            <div class="form-group">
+                                <label asp-for="ClientId" class="control-label text-light"></label>
+                                <select asp-for="ClientId" class="form-control bg-dark text-light border-dark" asp-items="ViewBag.ClientId" required>
+                                    <option value="">-- Select Client --</option>
+                                </select>
+                                <span asp-validation-for="ClientId" class="text-danger"></span>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label asp-for="Amount" class="control-label text-light"></label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text bg-dark text-light border-dark">$</span>
+                                    </div>
+                                    <input asp-for="Amount" class="form-control bg-dark text-light border-dark" placeholder="0.00" required />
+                                </div>
+                                <span asp-validation-for="Amount" class="text-danger"></span>
+                                <small class="form-text text-muted">Payment amount</small>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label asp-for="PaymentDate" class="control-label text-light"></label>
+                                        <input asp-for="PaymentDate" 
+                                               class="form-control bg-dark text-light border-dark" 
+                                               type="date" 
+                                               value="@Model.PaymentDate.ToString("yyyy-MM-dd")" />
+                                        <span asp-validation-for="PaymentDate" class="text-danger"></span>
+                                        <small class="form-text text-muted">Date of payment</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label asp-for="PaymentMethod" class="control-label text-light"></label>
+                                        <select asp-for="PaymentMethod" class="form-control bg-dark text-light border-dark" required>
+                                            <option value="">-- Select Method --</option>
+                                            <option value="Bank Transfer">Bank Transfer</option>
+                                            <option value="Credit Card">Credit Card</option>
+                                            <option value="Check">Check</option>
+                                            <option value="Cash">Cash</option>
+                                            <option value="Online Payment">Online Payment</option>
+                                        </select>
+                                        <span asp-validation-for="PaymentMethod" class="text-danger"></span>
+                                        <small class="form-text text-muted">Payment method used</small>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label asp-for="Notes" class="control-label text-light"></label>
+                                <textarea asp-for="Notes" class="form-control bg-dark text-light border-dark" rows="3" placeholder="Enter payment notes (optional)"></textarea>
+                                <span asp-validation-for="Notes" class="text-danger"></span>
+                                <small class="form-text text-muted">Additional notes about this payment</small>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary">
+                                Update Payment
+                            </button>
+                            <a asp-action="Index" class="btn btn-default ml-2">Back to List</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    
+    <script>
+        // Set the selected value for PaymentMethod dropdown
+        document.addEventListener('DOMContentLoaded', function() {
+            const paymentMethodSelect = document.querySelector('select[name="PaymentMethod"]');
+            const currentPaymentMethod = '@Model.PaymentMethod';
+            
+            if (paymentMethodSelect && currentPaymentMethod) {
+                for (let i = 0; i < paymentMethodSelect.options.length; i++) {
+                    if (paymentMethodSelect.options[i].value === currentPaymentMethod) {
+                        paymentMethodSelect.selectedIndex = i;
+                        break;
+                    }
+                }
+            }
+            
+            // Format amount input
+            const amountInput = document.querySelector('input[name="Amount"]');
+            if (amountInput) {
+                amountInput.addEventListener('blur', function() {
+                    if (this.value && !isNaN(this.value)) {
+                        this.value = parseFloat(this.value).toFixed(2);
+                    }
+                });
+                
+                // Ensure amount is formatted on load
+                if (amountInput.value && !isNaN(amountInput.value)) {
+                    amountInput.value = parseFloat(amountInput.value).toFixed(2);
+                }
+            }
+            
+            // Format date for date input
+            const paymentDateInput = document.querySelector('input[name="PaymentDate"]');
+            if (paymentDateInput && paymentDateInput.value) {
+                const date = new Date(paymentDateInput.value);
+                if (!isNaN(date.getTime())) {
+                    paymentDateInput.value = date.toISOString().split('T')[0];
+                }
+            }
+        });
+    </script>
+}

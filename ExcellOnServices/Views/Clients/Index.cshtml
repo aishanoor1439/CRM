@@ -1,0 +1,292 @@
+﻿@model IEnumerable<ExcellOnServices.Models.Client>
+
+@{
+    ViewData["Title"] = "Clients Management";
+}
+
+<section class="content">
+    <div class="container-fluid">
+        <!-- Search and Filter Card -->
+        <div class="card card-info">
+            <div class="card-header">
+                <h3 class="card-title">Search & Filter Clients</h3>
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="card-body"  style="background-color:#271940;">
+                <form asp-action="Index" method="get">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <label for="searchString">Search Clients:</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" name="searchString" value="@ViewData["CurrentFilter"]" 
+                                           placeholder="Search by company name, contact person, email, phone, or address...">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-info ml-2" type="submit">
+                                            <i class="fas fa-search"></i> Search
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="statusFilter">Filter by Status:</label>
+                                <select class="form-control" name="statusFilter" onchange="this.form.submit()">
+                                    <option value="">All Clients</option>
+                                    <option value="active" selected="@(ViewData["StatusFilter"]?.ToString() == "active")">Active Only</option>
+                                    <option value="inactive" selected="@(ViewData["StatusFilter"]?.ToString() == "inactive")">Inactive Only</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Stats Card -->
+        <div class="row">
+            <div class="col-lg-4 col-md-6">
+                <div class="small-box bg-info">
+                    <div class="inner" style="background-color:#271940;">
+                        <h3>@ViewData["TotalCount"]</h3>
+                        <p>Total Clients</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="small-box bg-success">
+                    <div class="inner" style="background-color:#271940;">
+                        <h3>@ViewData["ActiveCount"]</h3>
+                        <p>Active Clients</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="small-box bg-warning">
+                    <div class="inner" style="background-color:#271940;">
+                        <h3>@ViewData["InactiveCount"]</h3>
+                        <p>Inactive Clients</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-times-circle"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Clients Table Card -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">List of Clients</h3>
+                        <div class="card-tools">
+                            <a asp-action="Create" class="btn btn-primary btn-sm">
+                                <i class="fas fa-plus"></i> Add New Client
+                            </a>
+                        </div>
+                    </div>
+                    <div class="card-body" style="background-color:#271940;">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            <a asp-action="Index" 
+                                               asp-route-sortOrder="@ViewData["NameSortParam"]"
+                                               asp-route-searchString="@ViewData["CurrentFilter"]"
+                                               asp-route-statusFilter="@ViewData["StatusFilter"]">
+                                                Company Name
+                                                @if (ViewData["CurrentSort"]?.ToString() == "name_desc")
+                                                {
+                                                    <i class="fas fa-sort-down"></i>
+                                                }
+                                                else if (string.IsNullOrEmpty(ViewData["CurrentSort"]?.ToString()))
+                                                {
+                                                    <i class="fas fa-sort-up"></i>
+                                                }
+                                                else
+                                                {
+                                                    <i class="fas fa-sort"></i>
+                                                }
+                                            </a>
+                                        </th>
+                                        <th>Contact Person</th>
+                                        <th>
+                                            <a asp-action="Index" 
+                                               asp-route-sortOrder="@ViewData["DateSortParam"]"
+                                               asp-route-searchString="@ViewData["CurrentFilter"]"
+                                               asp-route-statusFilter="@ViewData["StatusFilter"]">
+                                                Registration Date
+                                                @if (ViewData["CurrentSort"]?.ToString() == "date")
+                                                {
+                                                    <i class="fas fa-sort-up"></i>
+                                                }
+                                                else if (ViewData["CurrentSort"]?.ToString() == "date_desc")
+                                                {
+                                                    <i class="fas fa-sort-down"></i>
+                                                }
+                                                else
+                                                {
+                                                    <i class="fas fa-sort"></i>
+                                                }
+                                            </a>
+                                        </th>
+                                        <th>
+                                            <a asp-action="Index" 
+                                               asp-route-sortOrder="@ViewData["StatusSortParam"]"
+                                               asp-route-searchString="@ViewData["CurrentFilter"]"
+                                               asp-route-statusFilter="@ViewData["StatusFilter"]">
+                                                Status
+                                                @if (ViewData["CurrentSort"]?.ToString() == "status")
+                                                {
+                                                    <i class="fas fa-sort-up"></i>
+                                                }
+                                                else if (ViewData["CurrentSort"]?.ToString() == "status_desc")
+                                                {
+                                                    <i class="fas fa-sort-down"></i>
+                                                }
+                                                else
+                                                {
+                                                    <i class="fas fa-sort"></i>
+                                                }
+                                            </a>
+                                        </th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model.Any())
+                                    {
+                                        @foreach (var item in Model)
+                                        {
+                                            <tr>
+                                                <td>@Html.DisplayFor(modelItem => item.CompanyName)</td>
+                                                <td>@Html.DisplayFor(modelItem => item.ContactPerson)</td>
+                                                <td>@item.RegistrationDate.ToString("yyyy-MM-dd")</td>
+                                                <td>
+                                                    @if (item.IsActive)
+                                                    {
+                                                        <span class="badge badge-success">Active</span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span class="badge badge-danger">Inactive</span>
+                                                    }
+                                                </td>
+                                                <td>
+                                                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-xs btn-warning">
+                                                        <i class="fas fa-edit"></i> Edit
+                                                    </a>
+                                                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-xs btn-info">
+                                                        <i class="fas fa-eye"></i> Details
+                                                    </a>
+                                                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-xs btn-danger">
+                                                        <i class="fas fa-trash"></i> Delete
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <tr>
+                                            <td colspan="7" class="text-center">
+                                                <div class="alert alert-info">
+                                                    <i class="icon fas fa-info"></i>
+                                                    No clients found. 
+                                                    @if (!string.IsNullOrEmpty(ViewData["CurrentFilter"]?.ToString()) || !string.IsNullOrEmpty(ViewData["StatusFilter"]?.ToString()))
+                                                    {
+                                                        <text>Try changing your search criteria or </text>
+                                                    }
+                                                    <a asp-action="Create"> Add a new client</a>.
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p class="mb-0" style="color:#271940;">
+                                    Showing <strong>@Model.Count()</strong> client(s)
+                                    @if (!string.IsNullOrEmpty(ViewData["CurrentFilter"]?.ToString()))
+                                    {
+                                        <text> matching "<strong>@ViewData["CurrentFilter"]</strong>"</text>
+                                    }
+                                </p>
+                            </div>
+                            <div class="col-md-6 text-right">
+                                <p class="mb-0" style="color:#271940;">
+                                    <i class="fas fa-filter"></i>
+                                    <strong>Search Tips:</strong> Search by any field - name, contact, etc
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @section Scripts {
+    <script>
+        $(document).ready(function() {
+            // Auto-focus search input
+            $('input[name="searchString"]').focus();
+            
+            // Clear search button
+            $('.btn-clear').click(function() {
+                $('input[name="searchString"]').val('');
+                $('select[name="statusFilter"]').val('');
+            });
+            
+            // Status filter auto-submit
+            $('select[name="statusFilter"]').change(function() {
+                $(this).closest('form').submit();
+            });
+            
+            // Display search results count
+            var searchString = '@ViewData["CurrentFilter"]';
+            var statusFilter = '@ViewData["StatusFilter"]';
+            
+            if (searchString || statusFilter) {
+                $('.search-results-info').show();
+            }
+        });
+    </script>
+    
+    <style>
+        .table th a {
+            color: #495057;
+            text-decoration: none;
+        }
+        .table th a:hover {
+            color: #007bff;
+            text-decoration: underline;
+        }
+        .sort-icon {
+            margin-left: 5px;
+        }
+        .search-results-info {
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+    </style>
+}
+</section>

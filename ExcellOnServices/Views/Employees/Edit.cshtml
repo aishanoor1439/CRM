@@ -1,0 +1,138 @@
+﻿@model ExcellOnServices.Models.Employee
+
+@{
+    ViewData["Title"] = "Edit Employee";
+}
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-warning">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            Edit Employee Information
+                        </h3>
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <form asp-action="Edit">
+                        <div class="card-body" style="background-color:#271940;">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <input type="hidden" asp-for="Id" />
+                            
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label asp-for="FirstName" class="control-label text-light"></label>
+                                        <input asp-for="FirstName" class="form-control bg-dark text-light border-dark" placeholder="Enter first name" />
+                                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label asp-for="LastName" class="control-label text-light"></label>
+                                        <input asp-for="LastName" class="form-control bg-dark text-light border-dark" placeholder="Enter last name" />
+                                        <span asp-validation-for="LastName" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label asp-for="Email" class="control-label text-light"></label>
+                                        <input asp-for="Email" class="form-control bg-dark text-light border-dark" placeholder="employee@example.com" />
+                                        <span asp-validation-for="Email" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label asp-for="Phone" class="control-label text-light"></label>
+                                        <input asp-for="Phone" class="form-control bg-dark text-light border-dark" placeholder="+1 (555) 123-4567" />
+                                        <span asp-validation-for="Phone" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label asp-for="DepartmentId" class="control-label text-light"></label>
+                                        <select asp-for="DepartmentId" class="form-control bg-dark text-light border-dark" asp-items="ViewBag.DepartmentId">
+                                            <option value="" class="text-dark">-- Select Department --</option>
+                                        </select>
+                                        <span asp-validation-for="DepartmentId" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label asp-for="ServiceId" class="control-label text-light"></label>
+                                        <select asp-for="ServiceId" class="form-control bg-dark text-light border-dark" asp-items="ViewBag.ServiceId">
+                                            <option value="" class="text-dark">-- Select Service --</option>
+                                        </select>
+                                        <span asp-validation-for="ServiceId" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label asp-for="Designation" class="control-label text-light"></label>
+                                <input asp-for="Designation" class="form-control bg-dark text-light border-dark" placeholder="Enter designation" />
+                                <span asp-validation-for="Designation" class="text-danger"></span>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label asp-for="HireDate" class="control-label text-light"></label>
+                                        <input asp-for="HireDate" class="form-control bg-dark text-light border-dark" type="date" />
+                                        <span asp-validation-for="HireDate" class="text-danger"></span>
+                                        <small class="form-text text-muted">Employee hire date</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label text-light">Status</label>
+                                        <div class="custom-control custom-switch mt-2">
+                                            <input type="checkbox" class="custom-control-input" id="isActiveSwitch" asp-for="IsActive">
+                                            <label class="custom-control-label text-light" for="isActiveSwitch">
+                                                @(Model.IsActive ? "Active Employee" : "Inactive Employee")
+                                            </label>
+                                        </div>
+                                        <small class="form-text text-muted">Toggle to change employee status</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary">
+                                Update Employee
+                            </button>
+                            <a asp-action="Index" class="btn btn-default ml-2">Back to List</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    
+    <script>
+        // Update the switch label text based on current state
+        document.getElementById('isActiveSwitch').addEventListener('change', function() {
+            const label = this.nextElementSibling;
+            if (this.checked) {
+                label.textContent = 'Active Employee';
+            } else {
+                label.textContent = 'Inactive Employee';
+            }
+        });
+    </script>
+}

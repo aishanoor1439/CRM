@@ -1,0 +1,774 @@
+/* ===== FUTURISTIC FINTECH LANDING PAGE STYLES ===== */
+.fintech-landing {
+    position: relative;
+    min-height: 100vh;
+    background: linear-gradient(135deg, var(--deep-purple) 0%, var(--deep-blue) 50%, #000814 100%);
+    font-family: 'Inter', 'Poppins', sans-serif;
+    color: #fff;
+    overflow-x: hidden;
+}
+
+/* Background Gradient */
+.fintech-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 20% 50%, rgba(157, 78, 221, 0.15) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(0, 245, 255, 0.1) 0%, transparent 50%), radial-gradient(circle at 40% 80%, rgba(108, 99, 255, 0.1) 0%, transparent 50%);
+    z-index: 0;
+}
+
+/* Header Container */
+.header-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    z-index: 1000;
+    background: rgba(16, 0, 43, 0.7);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0, 245, 255, 0.1);
+}
+
+/* Minimal Circular Tech Logo */
+.tech-logo {
+    z-index: 1001;
+}
+
+.logo-circle {
+    position: relative;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 245, 255, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 25px rgba(0, 245, 255, 0.2), inset 0 0 15px rgba(0, 245, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+    .logo-circle:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 35px rgba(0, 245, 255, 0.3), inset 0 0 20px rgba(0, 245, 255, 0.15);
+    }
+
+.logo-inner {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
+    box-shadow: 0 0 15px rgba(0, 245, 255, 0.5);
+}
+
+.logo-pulse {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 1px solid rgba(0, 245, 255, 0.5);
+    animation: logoPulse 2s infinite;
+}
+
+.logo-text {
+    position: absolute;
+    bottom: -20px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    color: var(--neon-blue);
+    text-shadow: 0 0 8px var(--neon-blue);
+}
+
+/* Navigation Bar */
+.fintech-nav {
+    z-index: 1001;
+}
+
+.nav-menu {
+    display: flex;
+    gap: 35px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-link {
+    color: rgba(255, 255, 255, 0.85);
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    position: relative;
+    padding: 8px 0;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 0.5px;
+}
+
+    .nav-link:hover {
+        color: var(--neon-blue);
+        text-shadow: 0 0 8px var(--neon-blue);
+    }
+
+    .nav-link::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
+        transition: width 0.3s ease;
+        box-shadow: 0 0 8px var(--neon-blue);
+    }
+
+    .nav-link:hover::after {
+        width: 100%;
+    }
+
+/* Main Content Wrapper */
+.main-content-wrapper {
+    position: relative;
+    display: flex;
+    min-height: 100vh;
+    width: 100%;
+    padding-top: 100px;
+    padding-left: 40px;
+    padding-right: 40px;
+    z-index: 1;
+    align-items: center;
+}
+
+/* Left Side - SMALLER Holographic Digital Globe */
+.holographic-globe-section {
+    flex: 1.1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 20px;
+}
+
+.globe-wrapper {
+    position: relative;
+    width: 380px; /* Reduced from 450px */
+    height: 380px; /* Reduced from 450px */
+}
+
+.digital-globe {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, rgba(0, 245, 255, 0.1) 0%, rgba(157, 78, 221, 0.05) 30%, transparent 70%);
+    transform-style: preserve-3d;
+    transition: transform 0.1s ease-out;
+    overflow: hidden;
+    box-shadow: 0 0 80px rgba(0, 245, 255, 0.2), /* Reduced glow */
+    inset 0 0 50px rgba(157, 78, 221, 0.1); /* Reduced inset glow */
+}
+
+/* Globe Particles */
+.globe-particle {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 2;
+}
+
+@keyframes particleFloat {
+    0% {
+        transform: translateZ(0) rotate(0deg);
+    }
+
+    100% {
+        transform: translateZ(0) rotate(360deg);
+    }
+}
+
+/* Globe Wireframe */
+.globe-wireframe {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    border: 1px solid rgba(0, 245, 255, 0.15); /* Lighter border */
+    width: calc(100% - 12px); /* Adjusted for smaller globe */
+    height: calc(100% - 12px); /* Adjusted for smaller globe */
+    pointer-events: none;
+}
+
+    .globe-wireframe.latitude {
+        transform: translate(-50%, -50%) rotateX(calc(var(--lat) * 1deg));
+    }
+
+    .globe-wireframe.longitude {
+        transform: translate(-50%, -50%) rotateY(calc(var(--lon) * 1deg));
+    }
+
+/* Light Trails */
+.light-trail {
+    position: absolute;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+@keyframes lightTrail {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg) translateX(120px) rotate(0deg); /* Smaller radius */
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    90% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg) translateX(120px) rotate(-360deg); /* Smaller radius */
+        opacity: 0;
+    }
+}
+
+/* Hexagonal Grid - Perfect Circular Arrangement */
+.hex-grid {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    transform-style: preserve-3d;
+    transition: transform 0.1s ease-out;
+}
+
+/* Hexagon Styles - SMALLER */
+.hexagon {
+    position: absolute;
+    width: 55px; /* Reduced from 70px */
+    height: 63px; /* Reduced from 80px */
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 245, 255, 0.4);
+    clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--neon-blue);
+    font-size: 20px; /* Reduced from 24px */
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    pointer-events: all;
+    z-index: 10;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 15px rgba(0, 245, 255, 0.25), /* Reduced shadow */
+    inset 0 0 12px rgba(0, 245, 255, 0.12); /* Reduced inset shadow */
+    filter: drop-shadow(0 0 4px var(--neon-blue)); /* Reduced drop shadow */
+}
+
+    .hexagon:hover {
+        background: rgba(255, 255, 255, 0.15);
+        box-shadow: 0 0 30px rgba(0, 245, 255, 0.4), /* Reduced hover shadow */
+        inset 0 0 20px rgba(0, 245, 255, 0.15); /* Reduced hover inset shadow */
+    }
+
+    .hexagon i {
+        position: relative;
+        z-index: 2;
+    }
+
+.hex-glow {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center, var(--neon-blue) 0%, transparent 70%);
+    opacity: 0.6;
+    clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+    transition: all 0.4s ease;
+    z-index: 1;
+}
+
+.hex-label {
+    position: absolute;
+    bottom: -30px; /* Adjusted position */
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    color: var(--neon-blue);
+    font-family: 'Orbitron', sans-serif;
+    font-size: 11px; /* Smaller font */
+    font-weight: 600;
+    letter-spacing: 1px;
+    opacity: 0;
+    transition: all 0.3s ease;
+    text-shadow: 0 0 6px var(--neon-blue); /* Reduced text shadow */
+    white-space: nowrap;
+    pointer-events: none;
+}
+
+/* Hexagon Connection Lines - SMALLER */
+.hex-connection {
+    position: absolute;
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, rgba(0, 245, 255, 0.6) 20%, rgba(0, 245, 255, 0.8) 50%, rgba(0, 245, 255, 0.6) 80%, transparent 100%);
+    box-shadow: 0 0 6px rgba(0, 245, 255, 0.4); /* Reduced shadow */
+    transform-origin: 0 0;
+    z-index: 5;
+    animation: connectionPulse 3s infinite ease-in-out;
+}
+
+@keyframes connectionPulse {
+    0%, 100% {
+        opacity: 0.4;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+/* Right Side - Content */
+.fintech-content {
+    flex: 0.9;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 30px 40px 30px 20px;
+    position: relative;
+}
+
+.content-wrapper {
+    max-width: 600px;
+}
+
+/* Headline */
+.fintech-headline {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 42px;
+    margin-bottom: 25px;
+    line-height: 1.2;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.headline-main {
+    display: block;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 8px;
+    font-size: 36px;
+}
+
+.headline-highlight {
+    display: block;
+    background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0 0 25px rgba(0, 245, 255, 0.4);
+    position: relative;
+    font-size: 42px;
+}
+
+    .headline-highlight::after {
+        content: '';
+        position: absolute;
+        bottom: 4px;
+        left: 0;
+        width: 100%;
+        height: 6px;
+        background: linear-gradient(90deg, var(--neon-blue), transparent);
+        opacity: 0.3;
+        z-index: -1;
+        border-radius: 3px;
+    }
+
+/* Description */
+.fintech-description {
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.7;
+    margin-bottom: 50px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    padding-right: 30px;
+}
+
+    .fintech-description p {
+        margin: 0;
+    }
+
+/* Social Media Icons (Vertical) */
+.social-icons-vertical {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    padding: 15px;
+}
+
+.social-icon {
+    position: relative;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 245, 255, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--neon-blue);
+    font-size: 18px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+    .social-icon:hover {
+        transform: translateX(-8px) scale(1.08);
+        background: rgba(255, 255, 255, 0.1);
+        border-color: var(--neon-blue);
+        box-shadow: 0 0 25px rgba(0, 245, 255, 0.3);
+    }
+
+.icon-glow {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: radial-gradient(circle at center, var(--neon-blue) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: -1;
+}
+
+.social-icon:hover .icon-glow {
+    opacity: 0.5;
+}
+
+/* Floating Elements */
+.floating-elements {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.data-stream {
+    position: absolute;
+    width: 1.5px;
+    background: linear-gradient(to bottom, transparent, var(--neon-blue), transparent);
+    box-shadow: 0 0 8px var(--neon-blue);
+}
+
+.stream-1 {
+    left: 15%;
+    top: 0;
+    height: 100%;
+    animation: streamFlow 8s infinite linear;
+}
+
+.stream-2 {
+    right: 20%;
+    top: 0;
+    height: 100%;
+    animation: streamFlow 10s infinite linear reverse;
+}
+
+.data-point {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    background: var(--neon-blue);
+    border-radius: 50%;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0 0 8px var(--neon-blue);
+    animation: dataPointFlow linear infinite;
+}
+
+.holographic-line {
+    position: absolute;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--neon-purple), transparent);
+    box-shadow: 0 0 8px var(--neon-purple);
+}
+
+.line-1 {
+    top: 30%;
+    left: 0;
+    width: 100%;
+    animation: linePulse 4s infinite ease-in-out;
+}
+
+.line-2 {
+    bottom: 25%;
+    left: 0;
+    width: 100%;
+    animation: linePulse 5s infinite ease-in-out reverse;
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes logoPulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 0.5;
+    }
+
+    50% {
+        transform: scale(1.15);
+        opacity: 0.7;
+    }
+}
+
+@keyframes streamFlow {
+    0% {
+        opacity: 0.3;
+    }
+
+    50% {
+        opacity: 0.8;
+    }
+
+    100% {
+        opacity: 0.3;
+    }
+}
+
+@keyframes dataPointFlow {
+    0% {
+        top: 0;
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    90% {
+        opacity: 1;
+    }
+
+    100% {
+        top: 100%;
+        opacity: 0;
+    }
+}
+
+@keyframes linePulse {
+    0%, 100% {
+        opacity: 0.2;
+    }
+
+    50% {
+        opacity: 0.6;
+    }
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 1200px) {
+    .main-content-wrapper {
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+
+    .fintech-headline {
+        font-size: 36px;
+    }
+
+    .headline-main {
+        font-size: 30px;
+    }
+
+    .headline-highlight {
+        font-size: 36px;
+    }
+
+    .globe-wrapper {
+        width: 340px; /* Adjusted for smaller base */
+        height: 340px; /* Adjusted for smaller base */
+    }
+
+    .hexagon {
+        width: 50px; /* Adjusted for smaller base */
+        height: 57px; /* Adjusted for smaller base */
+        font-size: 18px; /* Adjusted for smaller base */
+    }
+}
+
+@media (max-width: 992px) {
+    .main-content-wrapper {
+        flex-direction: column;
+        padding-top: 120px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .holographic-globe-section {
+        min-height: 300px; /* Reduced min-height */
+        padding: 15px;
+    }
+
+    .globe-wrapper {
+        width: 320px; /* Smaller for mobile */
+        height: 320px; /* Smaller for mobile */
+    }
+
+    .fintech-content {
+        padding: 30px 20px;
+        text-align: center;
+    }
+
+    .content-wrapper {
+        max-width: 100%;
+    }
+
+    .fintech-description {
+        padding-right: 0;
+    }
+
+    .social-icons-vertical {
+        position: relative;
+        flex-direction: row;
+        justify-content: center;
+        top: auto;
+        right: auto;
+        transform: none;
+        margin-top: 40px;
+    }
+
+    .header-container {
+        padding: 15px 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    .header-container {
+        padding: 12px 20px;
+    }
+
+    .nav-menu {
+        gap: 25px;
+    }
+
+    .nav-link {
+        font-size: 14px;
+    }
+
+    .fintech-headline {
+        font-size: 30px;
+    }
+
+    .headline-main {
+        font-size: 26px;
+    }
+
+    .headline-highlight {
+        font-size: 30px;
+    }
+
+    .fintech-description {
+        font-size: 15px;
+        line-height: 1.6;
+    }
+
+    .globe-wrapper {
+        width: 280px; /* Even smaller for mobile */
+        height: 280px; /* Even smaller for mobile */
+    }
+
+    .hexagon {
+        width: 45px; /* Even smaller for mobile */
+        height: 52px; /* Even smaller for mobile */
+        font-size: 16px; /* Even smaller for mobile */
+    }
+
+    .logo-circle {
+        width: 48px;
+        height: 48px;
+    }
+
+    .logo-inner {
+        width: 22px;
+        height: 22px;
+    }
+
+    .logo-text {
+        font-size: 10px;
+        bottom: -18px;
+    }
+}
+
+@media (max-width: 480px) {
+    .fintech-headline {
+        font-size: 24px;
+    }
+
+    .headline-main {
+        font-size: 20px;
+    }
+
+    .headline-highlight {
+        font-size: 24px;
+    }
+
+    .nav-menu {
+        gap: 15px;
+    }
+
+    .nav-link {
+        font-size: 13px;
+    }
+
+    .globe-wrapper {
+        width: 240px; /* Smallest for mobile */
+        height: 240px; /* Smallest for mobile */
+    }
+
+    .hexagon {
+        width: 40px; /* Smallest for mobile */
+        height: 46px; /* Smallest for mobile */
+        font-size: 15px; /* Smallest for mobile */
+    }
+
+    .logo-circle {
+        width: 42px;
+        height: 42px;
+    }
+
+    .logo-inner {
+        width: 20px;
+        height: 20px;
+    }
+
+    .logo-text {
+        font-size: 9px;
+        bottom: -16px;
+    }
+
+    .social-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+    }
+}

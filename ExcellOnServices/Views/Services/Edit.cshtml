@@ -1,0 +1,64 @@
+﻿@model ExcellOnServices.Models.Service
+
+@{
+    ViewData["Title"] = "Edit Service";
+}
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Edit Service Information</h3>
+                    </div>
+                    <form asp-action="Edit">
+                        <div class="card-body" style="background-color:#271940;">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <input type="hidden" asp-for="Id" />
+                            <input type="hidden" asp-for="CreatedDate" />
+                            
+                            <div class="form-group">
+                                <label asp-for="Name" class="control-label"></label>
+                                <input asp-for="Name" class="form-control" placeholder="Enter service name" />
+                                <span asp-validation-for="Name" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Description" class="control-label"></label>
+                                <textarea asp-for="Description" class="form-control" rows="3" placeholder="Enter service description"></textarea>
+                                <span asp-validation-for="Description" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="DailyChargePerEmployee" class="control-label"></label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">$</span>
+                                    </div>
+                                    <input asp-for="DailyChargePerEmployee" class="form-control" placeholder="4500" />
+                                </div>
+                                <span asp-validation-for="DailyChargePerEmployee" class="text-danger"></span>
+                                <small class="form-text text-muted">Daily charge per employee (e.g., 4500 for In-bound)</small>
+                            </div>
+                            <div class="form-group">
+                                <div class="custom-control custom-switch">
+                                    <input type="checkbox" class="custom-control-input" asp-for="IsActive">
+                                    <label class="custom-control-label" asp-for="IsActive"></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary">
+                                Update Service
+                            </button>
+                            <a asp-action="Index" class="btn btn-default">Back to List</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

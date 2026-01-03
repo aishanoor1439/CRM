@@ -1,0 +1,203 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - ExcellOn Services</title>
+    
+    <!-- Google Fonts (Same as Landing Page) -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- AdminLTE CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
+    
+    <!-- Dashboard Theme (Matches Landing Page) -->
+    <link rel="stylesheet" href="~/css/dashboard.css">
+    
+    <!-- Original site.css for other styles -->
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body class="hold-transition sidebar-mini fintech-dashboard">
+    <div class="wrapper">
+        <!-- Navbar -->
+        <nav class="main-header navbar navbar-expand navbar-white navbar-light border-bottom">
+    <!-- Left navbar links -->
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" data-widget="pushmenu" href="#" style="color: #271940;"><i class="fas fa-bars"></i></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" style="color: #271940;" asp-area="" asp-controller="Home" asp-action="Landing">Home</a>
+        </li>
+    </ul>
+    
+    <!-- Right navbar links -->
+    <partial name="_LoginPartial" />
+</nav>
+
+        <!-- Main Sidebar -->
+        <aside class="main-sidebar sidebar-dark-primary elevation-4">
+            <!-- Brand Logo -->
+            <a href="/" class="brand-link">
+                <i class="fas fa-chart-line brand-image img-circle elevation-3" style="opacity: .8; font-size: 24px; padding: 8px;"></i>
+                <span class="brand-text font-weight-light">ExcellOn</span>
+            </a>
+
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <!-- Sidebar Menu -->
+                <nav class="mt-2">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                        <li class="nav-item">
+                            <a asp-controller="Home" asp-action="Index" class="nav-link">
+                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                                <p>Dashboard</p>
+                            </a>
+                        </li>
+                        
+                        <!-- Services Menu -->
+                                <li class="nav-item">
+                                    <a asp-controller="Services" asp-action="Index" class="nav-link">
+                                        <i class="nav-icon fas fa-concierge-bell"></i>
+                                        <p>Services</p>
+                                    </a>
+                                </li>
+                        
+                        <!-- Departments Menu -->
+                                <li class="nav-item">
+                                    <a asp-controller="Departments" asp-action="Index" class="nav-link">
+                                        <i class="nav-icon fas fa-building"></i>
+                                        <p>Departments</p>
+                                    </a>
+                                </li>
+                        
+                        <!-- Employees Menu -->
+                                <li class="nav-item">
+                                    <a asp-controller="Employees" asp-action="Index" class="nav-link">
+                                        <i class="nav-icon fas fa-users"></i>
+                                        <p>Employees</p>
+                                    </a>
+                                </li>
+
+                        <!-- Clients Menu -->
+<li class="nav-item">
+    <a href="#" class="nav-link">
+        <i class="nav-icon fas fa-handshake"></i>
+        <p>
+            Clients
+            <i class="right fas fa-angle-left"></i>
+        </p>
+    </a>
+    <ul class="nav nav-treeview">
+        <li class="nav-item">
+            <a asp-controller="Clients" asp-action="Index" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Manage Clients</p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a asp-controller="ClientServices" asp-action="Index" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Service Assignments</p>
+            </a>
+        </li>
+    </ul>
+</li>
+
+<!-- Payments Menu -->
+<li class="nav-item">
+    <a asp-controller="Payments" asp-action="Index" class="nav-link">
+        <i class="nav-icon fas fa-credit-card"></i>
+        <p>Payments</p>
+    </a>
+</li>
+
+<!-- Reports Menu -->
+<li class="nav-item">
+    <a href="#" class="nav-link">
+        <i class="nav-icon fas fa-chart-bar"></i>
+        <p>
+            Reports
+            <i class="right fas fa-angle-left"></i>
+        </p>
+    </a>
+    <ul class="nav nav-treeview">
+        <li class="nav-item">
+            <a asp-controller="Reports" asp-action="Dashboard" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Dashboard Report</p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a asp-controller="Reports" asp-action="LatePayments" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Late Payments</p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a asp-controller="Reports" asp-action="ServiceUsage" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Service Usage</p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a asp-controller="Reports" asp-action="ClientSummary" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Client Summary</p>
+            </a>
+        </li>
+    </ul>
+</li>
+                    </ul>
+                </nav>
+            </div>
+        </aside>
+
+        <!-- Content Wrapper -->
+        <div class="content-wrapper">
+            <!-- Content Header -->
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1 class="m-0">@ViewData["Title"]</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Main content -->
+            <section class="content">
+                <div class="container-fluid">
+                    @RenderBody()
+                </div>
+            </section>
+        </div>
+
+        <!-- Footer -->
+        <footer class="main-footer">
+            <strong>Copyright &copy; @DateTime.Now.Year <a href="/">ExcellOn Services</a>.</strong> All rights reserved.
+            <div class="float-right d-none d-sm-inline-block">
+                <b>Version</b> 1.0.0
+            </div>
+        </footer>
+    </div>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <!-- Bootstrap 4 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- AdminLTE App from CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
+    
+    <!-- Custom JS -->
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

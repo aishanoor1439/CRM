@@ -1,0 +1,191 @@
+﻿@model ExcellOnServices.Models.ClientService
+
+@{
+    ViewData["Title"] = "Service Assignment Details";
+}
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 mx-auto">
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            <i class="fas fa-handshake mr-2"></i>Service Assignment Details
+                        </h3>
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body" style="background-color:#271940;">
+                        <div class="text-center mb-4">
+                            <div class="assignment-avatar bg-warning d-inline-flex align-items-center justify-content-center rounded-circle" 
+                                 style="width: 80px; height: 80px; font-size: 2rem;">
+                                <i class="fas fa-handshake"></i>
+                            </div>
+                            <h4 class="mt-2 text-light">@Model.Client.CompanyName</h4>
+                            <p class="text-muted">Assigned to <strong>@Model.Service.Name</strong> service</p>
+                        </div>
+                        
+                        <dl class="row">
+                            <dt class="col-sm-3 text-light">
+                                @Html.DisplayNameFor(model => model.Client)
+                            </dt>
+                            <dd class="col-sm-9">
+                                <div class="input-group" style="max-width: 400px;">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text bg-dark text-light border-dark">
+                                            <i class="fas fa-building"></i>
+                                        </span>
+                                    </div>
+                                    <span class="form-control bg-dark text-light border-dark font-weight-bold">
+                                        @Html.DisplayFor(model => model.Client.CompanyName)
+                                    </span>
+                                </div>
+                                @if (!string.IsNullOrEmpty(Model.Client.ContactPerson))
+                                {
+                                    <small class="form-text text-muted">Contact: @Model.Client.ContactPerson</small>
+                                }
+                            </dd>
+                            
+                            <dt class="col-sm-3 text-light">
+                                @Html.DisplayNameFor(model => model.Service)
+                            </dt>
+                            <dd class="col-sm-9">
+                                <div class="input-group" style="max-width: 400px;">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text bg-dark text-light border-dark">
+                                            <i class="fas fa-cogs"></i>
+                                        </span>
+                                    </div>
+                                    <span class="form-control bg-dark text-light border-dark font-weight-bold">
+                                        @Html.DisplayFor(model => model.Service.Name)
+                                    </span>
+                                </div>
+                                @if (!string.IsNullOrEmpty(Model.Service.Description))
+                                {
+                                    <div class="text-light p-2 mt-2" style="background-color: rgba(255,255,255,0.1); border-radius: 4px;">
+                                        @Html.DisplayFor(model => model.Service.Description)
+                                    </div>
+                                }
+                                <small class="form-text text-muted">Daily Rate: $@Html.DisplayFor(model => model.Service.DailyChargePerEmployee) per employee</small>
+                            </dd>
+                            
+                            <dt class="col-sm-3 text-light">
+                                @Html.DisplayNameFor(model => model.StartDate)
+                            </dt>
+                            <dd class="col-sm-9">
+                                <div class="input-group" style="max-width: 300px;">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text bg-dark text-light border-dark">
+                                            <i class="far fa-calendar-alt"></i>
+                                        </span>
+                                    </div>
+                                    <span class="form-control bg-dark text-light border-dark">
+                                        @Model.StartDate.ToString("MMMM dd, yyyy")
+                                    </span>
+                                </div>
+                            </dd>
+                            
+                            <dt class="col-sm-3 text-light">
+                                @Html.DisplayNameFor(model => model.EndDate)
+                            </dt>
+                            <dd class="col-sm-9">
+                                @if (Model.EndDate.HasValue)
+                                {
+                                    <div class="input-group" style="max-width: 300px;">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text bg-dark text-light border-dark">
+                                                <i class="fas fa-calendar-times"></i>
+                                            </span>
+                                        </div>
+                                        <span class="form-control bg-dark text-light border-dark">
+                                            @Model.EndDate.Value.ToString("MMMM dd, yyyy")
+                                        </span>
+                                    </div>
+                                        var totalDays = (Model.EndDate.Value - Model.StartDate).Days;
+                                        var remainingDays = (Model.EndDate.Value - DateTime.Now).Days;
+                                    <small class="form-text text-muted">
+                                        Duration: @totalDays days | 
+                                        @if (remainingDays > 0)
+                                        {
+                                            <span class="text-success">@remainingDays days remaining</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="text-danger">Service ended</span>
+                                        }
+                                    </small>
+                                }
+                                else
+                                {
+                                    <div class="input-group" style="max-width: 300px;">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text bg-dark text-light border-dark">
+                                                <i class="fas fa-infinity"></i>
+                                            </span>
+                                        </div>
+                                        <span class="form-control bg-dark text-light border-dark">
+                                            Ongoing Service
+                                        </span>
+                                    </div>
+                                    <small class="form-text text-muted">Active for @((DateTime.Now - Model.StartDate).Days) days</small>
+                                }
+                            </dd>
+                            
+                            <dt class="col-sm-3 text-light">
+                                @Html.DisplayNameFor(model => model.NumberOfEmployees)
+                            </dt>
+                            <dd class="col-sm-9">
+                                <div class="input-group" style="max-width: 300px;">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text bg-dark text-light border-dark">
+                                            <i class="fas fa-users"></i>
+                                        </span>
+                                    </div>
+                                    <span class="form-control bg-dark text-light border-dark font-weight-bold">
+                                        @Html.DisplayFor(model => model.NumberOfEmployees) employees
+                                    </span>
+                                </div>
+                                @if (Model.Service?.DailyChargePerEmployee > 0)
+                                {
+                                    var dailyCharge = Model.NumberOfEmployees * Model.Service.DailyChargePerEmployee;
+                                    <small class="form-text text-muted">
+                                        Daily Charge: $@dailyCharge.ToString("N0") 
+                                        (@Model.NumberOfEmployees × $@Model.Service.DailyChargePerEmployee)
+                                    </small>
+                                }
+                            </dd>
+                            
+                            <dt class="col-sm-3 text-light">
+                                @Html.DisplayNameFor(model => model.IsActive)
+                            </dt>
+                            <dd class="col-sm-9">
+                                @if (Model.IsActive)
+                                {
+                                    <span class="badge badge-success p-2">
+                                        <i class="fas fa-check-circle mr-1"></i> Active Assignment
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span class="badge badge-danger p-2">
+                                        <i class="fas fa-times-circle mr-1"></i> Inactive Assignment
+                                    </span>
+                                }
+                            </dd>
+                        </dl>
+                    </div>
+                    <div class="card-footer">
+                        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">
+                            <i class="fas fa-edit"></i> Edit Assignment
+                        </a>
+                        <a asp-action="Index" class="btn btn-default ml-2">Back to List</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

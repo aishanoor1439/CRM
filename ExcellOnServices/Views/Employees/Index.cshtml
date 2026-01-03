@@ -1,0 +1,70 @@
+﻿@model IEnumerable<ExcellOnServices.Models.Employee>
+
+@{
+    ViewData["Title"] = "Employees Management";
+}
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">List of Employees</h3>
+                        <div class="card-tools">
+                            <a asp-action="Create" class="btn btn-primary btn-sm">
+                                <i class="fas fa-plus"></i> Add New Employee
+                            </a>
+                        </div>
+                    </div>
+                    <div class="card-body" style="background-color:#271940;">
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Department</th>
+                                    <th>Service</th>
+                                    <th>Designation</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.FirstName @item.LastName</td>
+                                        <td>@(item.Department?.Name ?? "Not Assigned")</td>
+                                        <td>@(item.Service?.Name ?? "Not Assigned")</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Designation)</td>
+                                        <td>
+                                            @if (item.IsActive)
+                                            {
+                                                <span class="badge badge-success">Active</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="badge badge-danger">Inactive</span>
+                                            }
+                                        </td>
+                                        <td>
+                                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-xs btn-warning">
+                                                <i class="fas fa-edit"></i> Edit
+                                            </a>
+                                            <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-xs btn-info">
+                                                <i class="fas fa-eye"></i> Details
+                                            </a>
+                                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-xs btn-danger">
+                                                <i class="fas fa-trash"></i> Delete
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

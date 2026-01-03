@@ -1,0 +1,53 @@
+﻿@model IEnumerable<ExcellOnServices.Models.Client>
+
+@{
+    ViewData["Title"] = "Late Payments Report";
+}
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Clients with No Recent Payments (Last 30 Days)</h3>
+                <div class="card-tools">
+                    <span class="badge badge-warning">Report Date: @ViewBag.ReportDate</span>
+                </div>
+            </div>
+            <div class="card-body" style="background-color:#271940;">
+                @if (Model.Any())
+                {
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Company Name</th>
+                                <th>Contact Person</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Registration Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var client in Model)
+                            {
+                                <tr>
+                                    <td>@client.CompanyName</td>
+                                    <td>@client.ContactPerson</td>
+                                    <td>@client.Email</td>
+                                    <td>@client.Phone</td>
+                                    <td>@client.RegistrationDate.ToString("yyyy-MM-dd")</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <div class="alert alert-success">
+                        <i class="icon fas fa-check"></i>
+                        Excellent! All active clients have made payments in the last 30 days.
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>
