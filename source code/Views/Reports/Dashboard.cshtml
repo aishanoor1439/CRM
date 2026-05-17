@@ -118,7 +118,7 @@
                     <div class="card-header">
                         <h3 class="card-title">Recent Payments</h3>
                     </div>
-                    <div class="card-body" style="background-color:#271940;>
+                    <div class="card-body" style="background-color:#271940;">
                         @if (Model.RecentPayments.Any())
                         {
                             <table class="table table-bordered">
@@ -128,7 +128,6 @@
                                         <th>Amount</th>
                                         <th>Date</th>
                                         <th>Method</th>
-                                        <th>Notes</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -139,7 +138,6 @@
                                             <td class="text-success font-weight-bold">$@payment.Amount.ToString("N2")</td>
                                             <td>@payment.PaymentDate.ToString("yyyy-MM-dd")</td>
                                             <td>@payment.PaymentMethod</td>
-                                            <td>@payment.Notes</td>
                                         </tr>
                                     }
                                 </tbody>

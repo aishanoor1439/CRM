@@ -49,11 +49,12 @@
                                 <span asp-validation-for="Amount" class="text-danger"></span>
                                 <small class="form-text text-muted">Enter payment amount</small>
                             </div>
-                            <!-- ========== DECORATOR PATTERN SECTION - ADD HERE ========== -->
+
+                            <!-- ========== DECORATOR PATTERN SECTION - UPDATED ========== -->
                             <div class="card mt-3" style="background-color: #1e1230; border: 1px solid #ff6b35;">
                                 <div class="card-header" style="background-color: #ff6b35;">
                                     <h4 class="card-title mb-0 text-white">
-                                        <i class="fas fa-paint-brush mr-2"></i>Additional Charges (Decorator Pattern)
+                                        Additional Charges
                                     </h4>
                                 </div>
                                 <div class="card-body">
@@ -61,18 +62,18 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="applyLateFee" />
-                                                    <label class="custom-control-label text-light" for="applyLateFee">
-                                                        Apply Late Fee
+                                                    <input type="checkbox" class="custom-control-input" id="applyCustomCharge" />
+                                                    <label class="custom-control-label text-light" for="applyCustomCharge">
+                                                        Apply Custom Charge
                                                     </label>
                                                 </div>
                                                 <div class="input-group mt-2">
-                                                    <input type="number" id="lateFeePercent" class="form-control bg-dark text-light border-dark" placeholder="Percentage" value="10" step="0.1" disabled />
-                                                    <div class="input-group-append">
-                                                        <span class="input-group-text bg-dark text-light border-dark">%</span>
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text bg-dark text-light border-dark">$</span>
                                                     </div>
+                                                    <input type="number" id="customChargeAmount" class="form-control bg-dark text-light border-dark" placeholder="Custom Amount" value="35" step="0.01" disabled />
                                                 </div>
-                                                <small class="form-text text-muted">Additional percentage on late payment</small>
+                                                <small class="form-text text-muted">Custom additional charge (e.g., rush fee, special handling)</small>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
@@ -87,9 +88,46 @@
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text bg-dark text-light border-dark">$</span>
                                                     </div>
-                                                    <input type="number" id="processingFee" class="form-control bg-dark text-light border-dark" placeholder="Amount" value="25" step="0.01" disabled />
+                                                    <input type="number" id="processingFee" class="form-control bg-dark text-light border-dark" placeholder="Processing Fee Amount" value="25" step="0.01" disabled />
                                                 </div>
-                                                <small class="form-text text-muted">Fixed processing fee per transaction</small>
+                                                <small class="form-text text-muted">Payment gateway processing fee</small>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mt-3">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="checkbox" class="custom-control-input" id="applyTaxCharge" />
+                                                    <label class="custom-control-label text-light" for="applyTaxCharge">
+                                                        Apply Tax
+                                                    </label>
+                                                </div>
+                                                <div class="input-group mt-2">
+                                                    <input type="number" id="taxPercent" class="form-control bg-dark text-light border-dark" placeholder="Tax Percentage" value="5" step="0.1" disabled />
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text bg-dark text-light border-dark">%</span>
+                                                    </div>
+                                                </div>
+                                                <small class="form-text text-muted">Tax percentage on base amount</small>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="checkbox" class="custom-control-input" id="applyTip" />
+                                                    <label class="custom-control-label text-light" for="applyTip">
+                                                        Add Tip/Gratuity
+                                                    </label>
+                                                </div>
+                                                <div class="input-group mt-2">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text bg-dark text-light border-dark">$</span>
+                                                    </div>
+                                                    <input type="number" id="tipAmount" class="form-control bg-dark text-light border-dark" placeholder="Tip Amount" value="10" step="0.01" disabled />
+                                                </div>
+                                                <small class="form-text text-muted">Optional tip or gratuity amount</small>
                                             </div>
                                         </div>
                                     </div>
@@ -98,15 +136,17 @@
 
                                     <div class="form-group text-center">
                                         <label class="control-label" style="font-size: 20px; color: #ff6b35; font-weight: bold;">
-                                            💰 FINAL AMOUNT AFTER DECORATORS:
+                                            FINAL AMOUNT:
                                         </label>
                                         <h2 id="finalAmountDisplay" style="color: #00ff00; font-weight: bold; font-size: 32px;">$0.00</h2>
                                         <input type="hidden" id="finalAmountHidden" name="DecoratedAmount" />
+                                        <div id="calculationBreakdown" style="font-size: 12px; color: #888;" class="mt-2"></div>
                                         <small class="form-text text-muted">Original amount + all selected charges</small>
                                     </div>
                                 </div>
                             </div>
                             <!-- ========== DECORATOR PATTERN SECTION END ========== -->
+
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -137,20 +177,23 @@
                                 </div>
                             </div>
 
-                            <div class="form-group">
+                            @* <div class="form-group">
                                 <label asp-for="Notes" class="control-label text-light"></label>
                                 <textarea asp-for="Notes" class="form-control bg-dark text-light border-dark" rows="3" placeholder="Enter payment notes (optional)"></textarea>
                                 <span asp-validation-for="Notes" class="text-danger"></span>
                                 <small class="form-text text-muted">Additional notes about this payment</small>
-                            </div>
+                            </div> *@
                         </div>
                         <div class="card-footer">
                             <!-- Hidden fields for decorator pattern -->
-                            <input type="hidden" name="ApplyLateFee" id="hdnApplyLateFee" value="false" />
-                            <input type="hidden" name="LateFeePercent" id="hdnLateFeePercent" value="0" />
+                            <input type="hidden" name="ApplyCustomCharge" id="hdnApplyCustomCharge" value="false" />
+                            <input type="hidden" name="CustomChargeAmount" id="hdnCustomChargeAmount" value="0" />
                             <input type="hidden" name="ApplyProcessingFee" id="hdnApplyProcessingFee" value="false" />
                             <input type="hidden" name="ProcessingFee" id="hdnProcessingFee" value="0" />
-
+                            <input type="hidden" name="ApplyTaxCharge" id="hdnApplyTaxCharge" value="false" />
+                            <input type="hidden" name="TaxPercent" id="hdnTaxPercent" value="0" />
+                            <input type="hidden" name="ApplyTip" id="hdnApplyTip" value="false" />
+                            <input type="hidden" name="TipAmount" id="hdnTipAmount" value="0" />
 
                             <button type="submit" class="btn btn-primary">
                                 Record Payment
@@ -171,25 +214,29 @@
                         </div>
                     </div>
                     <div class="card-body" style="background-color:#271940;">
-                        <p class="text-light"><strong>Standard Service Charges:</strong></p>
+                        <p class="text-light"><strong>Available Fee Options:</strong></p>
                         <ul class="mb-3 text-light">
-                            <li>In-bound: $4,500/day/employee</li>
-                            <li>Out-bound: $6,000/day/employee</li>
-                            <li>Tele Marketing: $5,500/day/employee</li>
+                            <li><strong>Custom Charge:</strong> Custom additional charge (rush fee, special handling, etc.)</li>
+                            <li><strong>Processing Fee:</strong> Payment gateway processing fee</li>
+                            <li><strong>Tax:</strong> Tax percentage on base amount</li>
+                            <li><strong>Tip/Gratuity:</strong> Optional tip amount</li>
                         </ul>
                         <div class="alert alert-success">
                             <i class="icon fas fa-money-bill-wave"></i>
                             <strong>Payment Calculation:</strong><br>
-                            Total = Service Charge × Employees × Days
+                            Total = Base Amount + All Selected Fees + Tax
                         </div>
                         <p class="text-light small">
-                            <strong>Quick Calculation Example:</strong>
+                            <strong>Example Calculation:</strong>
                         </p>
                         <div class="bg-dark p-2 rounded mb-3">
                             <p class="mb-1 text-light small">
-                                <strong>In-bound Service:</strong><br>
-                                5 employees × 30 days × $4,500 =<br>
-                                <span class="text-success font-weight-bold">$675,000</span>
+                                <strong>Base Amount: $1,000</strong><br>
+                                + Custom Charge: $35<br>
+                                + Processing Fee: $25<br>
+                                + Tax (5%): $50<br>
+                                + Tip: $10<br>
+                                = <strong class="text-success">$1,120.00</strong>
                             </p>
                         </div>
                         <p class="text-muted small">
@@ -228,93 +275,96 @@
                     }
                 });
             }
-
-            // Debug form submission
-            const form = document.querySelector('form');
-            form.addEventListener('submit', function (e) {
-                console.log('Form submission starting...');
-                console.log('ClientId:', document.querySelector('[name="ClientId"]').value);
-                console.log('Amount:', document.querySelector('[name="Amount"]').value);
-                console.log('PaymentDate:', document.querySelector('[name="PaymentDate"]').value);
-                console.log('PaymentMethod:', document.querySelector('[name="PaymentMethod"]').value);
-                console.log('Notes:', document.querySelector('[name="Notes"]').value);
-
-                // Validate required fields
-                const clientId = document.querySelector('[name="ClientId"]').value;
-                const amount = document.querySelector('[name="Amount"]').value;
-                const paymentMethod = document.querySelector('[name="PaymentMethod"]').value;
-
-                if (!clientId || clientId === '') {
-                    e.preventDefault();
-                    alert('Please select a client');
-                    return;
-                }
-
-                if (!amount || amount === '' || parseFloat(amount) <= 0) {
-                    e.preventDefault();
-                    alert('Please enter a valid amount greater than 0');
-                    return;
-                }
-
-                if (!paymentMethod || paymentMethod === '') {
-                    e.preventDefault();
-                    alert('Please select a payment method');
-                    return;
-                }
-
-                console.log('Form validation passed, submitting...');
-            });
         });
+
         // ========== DECORATOR PATTERN CALCULATION ==========
         function calculateFinalAmount() {
             // Get original amount
             let amountInput = document.querySelector('input[name="Amount"]');
             let originalAmount = parseFloat(amountInput?.value) || 0;
             let finalAmount = originalAmount;
+            let breakdown = [`Base Amount: $${originalAmount.toFixed(2)}`];
 
             // Get checkbox states
-            let applyLateFee = document.getElementById('applyLateFee')?.checked || false;
+            let applyCustomCharge = document.getElementById('applyCustomCharge')?.checked || false;
             let applyProcessingFee = document.getElementById('applyProcessingFee')?.checked || false;
+            let applyTaxCharge = document.getElementById('applyTaxCharge')?.checked || false;
+            let applyTip = document.getElementById('applyTip')?.checked || false;
 
             // Get fee values
-            let lateFeePercent = parseFloat(document.getElementById('lateFeePercent')?.value) || 0;
+            let customChargeAmount = parseFloat(document.getElementById('customChargeAmount')?.value) || 0;
             let processingFee = parseFloat(document.getElementById('processingFee')?.value) || 0;
+            let taxPercent = parseFloat(document.getElementById('taxPercent')?.value) || 0;
+            let tipAmount = parseFloat(document.getElementById('tipAmount')?.value) || 0;
 
-            // Apply late fee decorator
-            if (applyLateFee && lateFeePercent > 0) {
-                let lateFeeAmount = originalAmount * (lateFeePercent / 100);
-                finalAmount += lateFeeAmount;
-                console.log(`Late Fee (${lateFeePercent}%): $${lateFeeAmount}`);
+            // Apply custom charge decorator
+            if (applyCustomCharge && customChargeAmount > 0) {
+                finalAmount += customChargeAmount;
+                breakdown.push(`+ Custom Charge: $${customChargeAmount.toFixed(2)}`);
             }
 
             // Apply processing fee decorator
             if (applyProcessingFee && processingFee > 0) {
                 finalAmount += processingFee;
-                console.log(`Processing Fee: $${processingFee}`);
+                breakdown.push(`+ Processing Fee: $${processingFee.toFixed(2)}`);
+            }
+
+            // Apply tax charge (percentage on original amount)
+            if (applyTaxCharge && taxPercent > 0) {
+                let taxAmount = originalAmount * (taxPercent / 100);
+                finalAmount += taxAmount;
+                breakdown.push(`+ Tax (${taxPercent}%): $${taxAmount.toFixed(2)}`);
+            }
+
+            // Apply tip/gratuity
+            if (applyTip && tipAmount > 0) {
+                finalAmount += tipAmount;
+                breakdown.push(`+ Tip/Gratuity: $${tipAmount.toFixed(2)}`);
             }
 
             // Update display
-            document.getElementById('finalAmountDisplay').innerText = '$' + finalAmount.toFixed(2);
+            document.getElementById('finalAmountDisplay').innerHTML = '$' + finalAmount.toFixed(2);
             document.getElementById('finalAmountHidden').value = finalAmount;
 
+            // Show calculation breakdown
+            if (breakdown.length > 1) {
+                document.getElementById('calculationBreakdown').innerHTML = breakdown.join(' → ') + ` = <strong>$${finalAmount.toFixed(2)}</strong>`;
+            } else {
+                document.getElementById('calculationBreakdown').innerHTML = 'No additional charges selected';
+            }
+
             // Update hidden fields for form submission
-            document.getElementById('hdnApplyLateFee').value = applyLateFee ? 'true' : 'false';
-            document.getElementById('hdnLateFeePercent').value = lateFeePercent;
+            document.getElementById('hdnApplyCustomCharge').value = applyCustomCharge ? 'true' : 'false';
+            document.getElementById('hdnCustomChargeAmount').value = customChargeAmount;
             document.getElementById('hdnApplyProcessingFee').value = applyProcessingFee ? 'true' : 'false';
             document.getElementById('hdnProcessingFee').value = processingFee;
+            document.getElementById('hdnApplyTaxCharge').value = applyTaxCharge ? 'true' : 'false';
+            document.getElementById('hdnTaxPercent').value = taxPercent;
+            document.getElementById('hdnApplyTip').value = applyTip ? 'true' : 'false';
+            document.getElementById('hdnTipAmount').value = tipAmount;
 
             console.log(`Original: $${originalAmount}, Final: $${finalAmount}`);
             return finalAmount;
         }
 
         // Enable/disable inputs when checkbox changes
-        document.getElementById('applyLateFee')?.addEventListener('change', function () {
-            document.getElementById('lateFeePercent').disabled = !this.checked;
+        document.getElementById('applyCustomCharge')?.addEventListener('change', function () {
+            document.getElementById('customChargeAmount').disabled = !this.checked;
             calculateFinalAmount();
         });
 
         document.getElementById('applyProcessingFee')?.addEventListener('change', function () {
             document.getElementById('processingFee').disabled = !this.checked;
+            calculateFinalAmount();
+        });
+
+        document.getElementById('applyTaxCharge')?.addEventListener('change', function () {
+            document.getElementById('taxPercent').disabled = !this.checked;
+            calculateFinalAmount();
+        });
+
+        document.getElementById('applyTip')?.addEventListener('change', function () {
+            document.getElementById('tipAmount').disabled = !this.checked;
             calculateFinalAmount();
         });
 
@@ -330,8 +380,10 @@
         }
 
         // Listen to fee value changes
-        document.getElementById('lateFeePercent')?.addEventListener('input', calculateFinalAmount);
+        document.getElementById('customChargeAmount')?.addEventListener('input', calculateFinalAmount);
         document.getElementById('processingFee')?.addEventListener('input', calculateFinalAmount);
+        document.getElementById('taxPercent')?.addEventListener('input', calculateFinalAmount);
+        document.getElementById('tipAmount')?.addEventListener('input', calculateFinalAmount);
 
         // Override form submission to use decorated amount
         document.querySelector('form')?.addEventListener('submit', function (e) {
