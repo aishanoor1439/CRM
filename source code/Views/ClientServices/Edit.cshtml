@@ -13,17 +13,12 @@
                         <h3 class="card-title">
                             Edit Service Assignment
                         </h3>
-                        <div class="card-tools">
-                            <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                                <i class="fas fa-minus"></i>
-                            </button>
-                        </div>
                     </div>
                     <form asp-action="Edit" id="editForm">
                         <div class="card-body" style="background-color:#271940;">
                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                             <input type="hidden" asp-for="Id" />
-                            
+
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -44,14 +39,14 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label asp-for="StartDate" class="control-label text-light"></label>
-                                        <input asp-for="StartDate" 
-                                               class="form-control bg-dark text-light border-dark" 
-                                               type="date" 
+                                        <input asp-for="StartDate"
+                                               class="form-control bg-dark text-light border-dark"
+                                               type="date"
                                                value="@Model.StartDate.ToString("yyyy-MM-dd")" />
                                         <span asp-validation-for="StartDate" class="text-danger"></span>
                                         <small class="form-text text-muted">Service start date</small>
@@ -60,8 +55,8 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label asp-for="EndDate" class="control-label text-light"></label>
-                                        <input asp-for="EndDate" 
-                                               class="form-control bg-dark text-light border-dark" 
+                                        <input asp-for="EndDate"
+                                               class="form-control bg-dark text-light border-dark"
                                                type="date"
                                                value="@(Model.EndDate?.ToString("yyyy-MM-dd") ?? "")" />
                                         <small class="form-text text-muted">Leave empty for ongoing service</small>
@@ -69,20 +64,39 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label asp-for="NumberOfEmployees" class="control-label text-light"></label>
-                                        <input asp-for="NumberOfEmployees" 
-                                               class="form-control bg-dark text-light border-dark" 
-                                               type="number" 
-                                               min="1" 
+                                        <input asp-for="NumberOfEmployees"
+                                               id="NumberOfEmployees"
+                                               class="form-control bg-dark text-light border-dark"
+                                               type="number"
+                                               min="1"
                                                max="1000" />
                                         <span asp-validation-for="NumberOfEmployees" class="text-danger"></span>
                                         <small class="form-text text-muted">Number of employees assigned to this service</small>
                                     </div>
                                 </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="alert alert-info mt-2" id="availableEmployeesDisplay">
+                                            <small class="form-text text-muted">Based on employees assigned to this service</small>
+                                            <i class="fas fa-users"></i>
+                                            <span id="availableCount">0</span> employees available for selected service
+                                        </div>
+                                        <div id="employeesList" style="display:none; max-height:200px; overflow-y:auto;" class="bg-dark p-2 rounded">
+                                            <small class="text-light">Available employees for this service:</small>
+                                            <ul id="employeeNamesList" class="list-unstyled mt-1">
+                                                <li><small class="text-muted">Select a service to see employees</small></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="control-label text-light">Status</label>
@@ -98,7 +112,7 @@
                             </div>
                         </div>
                         <div class="card-footer">
-                            <button type="submit" class="btn btn-primary">
+                            <button type="submit" class="btn btn-primary" id="submitBtn">
                                 Update Assignment
                             </button>
                             <a asp-action="Index" class="btn btn-default ml-2">Back to List</a>
@@ -111,9 +125,170 @@
 </section>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
     <script>
+        // Store the original number of employees when the page loads
+        let originalNumberOfEmployees = parseInt(document.getElementById('NumberOfEmployees').value);
+
+        // Function to fetch available employees count and list for selected service
+        async function updateAvailableEmployeesCount() {
+            const serviceId = document.getElementById('ServiceId').value;
+            const availableCountSpan = document.getElementById('availableCount');
+            const numberOfEmployeesInput = document.getElementById('NumberOfEmployees');
+            const submitBtn = document.getElementById('submitBtn');
+            const employeesListDiv = document.getElementById('employeesList');
+            const employeeNamesList = document.getElementById('employeeNamesList');
+
+            if (serviceId && serviceId !== "") {
+                try {
+                    // Fetch both count and employee list
+                    const response = await fetch(`/ClientServices/GetAvailableEmployeesCount?serviceId=${serviceId}`);
+                    const data = await response.json();
+
+                    const availableCount = data.count;
+                    availableCountSpan.textContent = availableCount;
+                    availableCountSpan.style.fontWeight = 'bold';
+                    availableCountSpan.style.fontSize = '1.2em';
+
+                    // Update max attribute for NumberOfEmployees input
+                    numberOfEmployeesInput.max = availableCount;
+
+                    // Show employees list if available
+                    if (data.employees && data.employees.length > 0) {
+                        employeesListDiv.style.display = 'block';
+                        employeeNamesList.innerHTML = data.employees.map(emp =>
+                            `<li><small class="text-light">• ${emp.firstName} ${emp.lastName} - ${emp.designation || 'No designation'}</small></li>`
+                        ).join('');
+                    } else {
+                        employeesListDiv.style.display = 'none';
+                        employeeNamesList.innerHTML = '<li><small class="text-muted">No employees assigned to this service</small></li>';
+                    }
+
+                    // Validate current value against available count
+                    const currentValue = parseInt(numberOfEmployeesInput.value);
+                    if (currentValue > availableCount) {
+                        numberOfEmployeesInput.value = availableCount;
+                        showWarning(`Maximum available employees for this service is ${availableCount}. Current value was ${currentValue}.`);
+                    } else if (availableCount === 0) {
+                        showWarning('No employees available for this service. Please assign employees to this service first.');
+                        submitBtn.disabled = true;
+                    } else {
+                        submitBtn.disabled = false;
+                        // Remove warning if exists
+                        const warningDiv = document.getElementById('warningMessage');
+                        if (warningDiv) warningDiv.remove();
+                    }
+
+                    // Change color based on availability
+                    const displayDiv = document.getElementById('availableEmployeesDisplay');
+                    if (availableCount === 0) {
+                        displayDiv.classList.remove('alert-info');
+                        displayDiv.classList.add('alert-warning');
+                    } else if (currentValue > availableCount) {
+                        displayDiv.classList.remove('alert-info');
+                        displayDiv.classList.add('alert-danger');
+                    } else {
+                        displayDiv.classList.remove('alert-warning', 'alert-danger');
+                        displayDiv.classList.add('alert-info');
+                    }
+
+                } catch (error) {
+                    console.error('Error fetching available employees:', error);
+                    availableCountSpan.textContent = 'Error loading';
+                }
+            } else {
+                availableCountSpan.textContent = '0';
+                numberOfEmployeesInput.max = 1000;
+                submitBtn.disabled = false;
+                employeesListDiv.style.display = 'none';
+
+                const displayDiv = document.getElementById('availableEmployeesDisplay');
+                displayDiv.classList.remove('alert-warning', 'alert-danger');
+                displayDiv.classList.add('alert-info');
+            }
+        }
+
+        // Function to show warning message
+        function showWarning(message) {
+            // Remove existing warning
+            const existingWarning = document.getElementById('warningMessage');
+            if (existingWarning) existingWarning.remove();
+
+            // Create new warning
+            const warningDiv = document.createElement('div');
+            warningDiv.id = 'warningMessage';
+            warningDiv.className = 'alert alert-warning alert-dismissible fade show mt-2';
+            warningDiv.innerHTML = `
+                <i class="icon fas fa-exclamation-triangle"></i>
+                ${message}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            `;
+
+            // Insert after the available employees display
+            const displayDiv = document.getElementById('availableEmployeesDisplay');
+            displayDiv.parentNode.insertBefore(warningDiv, displayDiv.nextSibling);
+
+            // Auto-hide after 5 seconds
+            setTimeout(() => {
+                if (warningDiv) warningDiv.remove();
+            }, 5000);
+        }
+
+        // Listen for service selection change
+        document.getElementById('ServiceId').addEventListener('change', function() {
+            updateAvailableEmployeesCount();
+        });
+
+        // Validate NumberOfEmployees when user changes it
+        document.getElementById('NumberOfEmployees').addEventListener('change', function() {
+            const maxValue = parseInt(this.max);
+            const currentValue = parseInt(this.value);
+
+            if (currentValue > maxValue) {
+                this.value = maxValue;
+                showWarning(`Number of employees cannot exceed available employees (${maxValue})`);
+
+                // Change the display color to danger
+                const displayDiv = document.getElementById('availableEmployeesDisplay');
+                displayDiv.classList.remove('alert-info', 'alert-warning');
+                displayDiv.classList.add('alert-danger');
+            } else if (currentValue < 1) {
+                this.value = 1;
+            } else {
+                // Reset to info color if valid
+                const displayDiv = document.getElementById('availableEmployeesDisplay');
+                if (maxValue > 0) {
+                    displayDiv.classList.remove('alert-warning', 'alert-danger');
+                    displayDiv.classList.add('alert-info');
+                }
+            }
+        });
+
+        // Add form validation before submit
+        document.getElementById('editForm').addEventListener('submit', function(e) {
+            const numberOfEmployees = parseInt(document.getElementById('NumberOfEmployees').value);
+            const maxEmployees = parseInt(document.getElementById('NumberOfEmployees').max);
+
+            if (numberOfEmployees > maxEmployees) {
+                e.preventDefault();
+                showWarning(`Cannot assign ${numberOfEmployees} employees. Only ${maxEmployees} employees available for this service.`);
+                return false;
+            }
+
+            if (maxEmployees === 0) {
+                e.preventDefault();
+                showWarning('Cannot assign service because no employees are available for this service.');
+                return false;
+            }
+
+            return true;
+        });
+
         // Update the switch label text
         document.getElementById('isActiveSwitch').addEventListener('change', function() {
             const label = document.getElementById('statusLabel');
@@ -123,8 +298,8 @@
                 label.textContent = 'Inactive Assignment';
             }
         });
-        
-        // Fix for date inputs
+
+        // Fix for date inputs and initialize available employees
         document.addEventListener('DOMContentLoaded', function() {
             // Format StartDate for date input
             const startDateInput = document.querySelector('input[name="StartDate"]');
@@ -134,7 +309,7 @@
                     startDateInput.value = date.toISOString().split('T')[0];
                 }
             }
-            
+
             // Format EndDate for date input
             const endDateInput = document.querySelector('input[name="EndDate"]');
             if (endDateInput && endDateInput.value) {
@@ -142,6 +317,12 @@
                 if (!isNaN(date.getTime())) {
                     endDateInput.value = date.toISOString().split('T')[0];
                 }
+            }
+
+            // Initialize available employees count for the currently selected service
+            const serviceSelect = document.getElementById('ServiceId');
+            if (serviceSelect && serviceSelect.value) {
+                updateAvailableEmployeesCount();
             }
         });
     </script>

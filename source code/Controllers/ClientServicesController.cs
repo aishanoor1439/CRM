@@ -285,5 +285,16 @@ namespace ExcellOnServices.Controllers
         {
             return _context.ClientServices.Any(e => e.Id == id);
         }
+
+        // Add this method to your ClientServicesController
+        [HttpGet]
+        public async Task<IActionResult> GetAvailableEmployeesCount(int serviceId)
+        {
+            var availableEmployeesCount = await _context.Employees
+                .Where(e => e.ServiceId == serviceId && e.IsActive)
+                .CountAsync();
+
+            return Json(new { count = availableEmployeesCount });
+        }
     }
 }
