@@ -10,25 +10,40 @@ namespace ExcellOnServices.Controllers
     [Authorize]
     public class EmployeesController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private ApplicationDbContext _context;
 
-        public EmployeesController(ApplicationDbContext context)
+        // FIXED: Using Singleton Pattern instead of Dependency Injection
+        public EmployeesController()
         {
-            _context = context;
+            _context = DatabaseHandler.GetContext();
+        }
+
+        // Safety method to ensure context is valid
+        private void EnsureContext()
+        {
+            try
+            {
+                var test = _context.Model;
+            }
+            catch (ObjectDisposedException)
+            {
+                _context = DatabaseHandler.GetContext();
+            }
         }
 
         public async Task<IActionResult> Index()
         {
+            EnsureContext();
             var employees = await _context.Employees
                 .Include(e => e.Department)
                 .Include(e => e.Service)
                 .ToListAsync();
-
             return View(employees);
         }
 
         public async Task<IActionResult> Details(int? id)
         {
+            EnsureContext();
             if (id == null) return NotFound();
 
             var employee = await _context.Employees
@@ -37,19 +52,18 @@ namespace ExcellOnServices.Controllers
                 .FirstOrDefaultAsync(e => e.Id == id);
 
             if (employee == null) return NotFound();
-
             return View(employee);
         }
 
         public IActionResult Create()
         {
+            EnsureContext();
             ViewBag.Departments = new SelectList(_context.Departments, "Id", "Name");
             ViewBag.Services = new SelectList(
                 _context.Services.Where(s => s.IsActive),
                 "Id",
                 "Name"
             );
-
             return View();
         }
 
@@ -57,6 +71,7 @@ namespace ExcellOnServices.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Employee employee)
         {
+            EnsureContext();
             ModelState.Remove("Department");
             ModelState.Remove("Service");
 
@@ -72,11 +87,9 @@ namespace ExcellOnServices.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-
-
-
         public async Task<IActionResult> Edit(int? id)
         {
+            EnsureContext();
             if (id == null) return NotFound();
 
             var employee = await _context.Employees.FindAsync(id);
@@ -103,6 +116,7 @@ namespace ExcellOnServices.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Employee employee)
         {
+            EnsureContext();
             if (id != employee.Id) return NotFound();
 
             if (ModelState.IsValid)
@@ -117,7 +131,6 @@ namespace ExcellOnServices.Controllers
                 {
                     if (!EmployeeExists(employee.Id))
                         return NotFound();
-
                     throw;
                 }
             }
@@ -141,6 +154,7 @@ namespace ExcellOnServices.Controllers
 
         public async Task<IActionResult> Delete(int? id)
         {
+            EnsureContext();
             if (id == null) return NotFound();
 
             var employee = await _context.Employees
@@ -149,7 +163,6 @@ namespace ExcellOnServices.Controllers
                 .FirstOrDefaultAsync(e => e.Id == id);
 
             if (employee == null) return NotFound();
-
             return View(employee);
         }
 
@@ -157,18 +170,19 @@ namespace ExcellOnServices.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            EnsureContext();
             var employee = await _context.Employees.FindAsync(id);
             if (employee != null)
             {
                 _context.Employees.Remove(employee);
                 await _context.SaveChangesAsync();
             }
-
             return RedirectToAction(nameof(Index));
         }
 
         private bool EmployeeExists(int id)
         {
+            EnsureContext();
             return _context.Employees.Any(e => e.Id == id);
         }
     }

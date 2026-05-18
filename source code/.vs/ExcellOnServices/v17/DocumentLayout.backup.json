@@ -1,0 +1,224 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\aisha_ppxjc2l\\OneDrive\\Documents\\My Web Sites\\ExcellOn Consulting Services Management System\\source code\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{F5580DA1-CB27-4CFB-A614-D771A26F891D}|ExcellOnServices.csproj|c:\\users\\aisha_ppxjc2l\\onedrive\\documents\\my web sites\\excellon consulting services management system\\source code\\controllers\\paymentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F5580DA1-CB27-4CFB-A614-D771A26F891D}|ExcellOnServices.csproj|solutionrelative:controllers\\paymentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F5580DA1-CB27-4CFB-A614-D771A26F891D}|ExcellOnServices.csproj|c:\\users\\aisha_ppxjc2l\\onedrive\\documents\\my web sites\\excellon consulting services management system\\source code\\models\\paymentdecorator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F5580DA1-CB27-4CFB-A614-D771A26F891D}|ExcellOnServices.csproj|solutionrelative:models\\paymentdecorator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F5580DA1-CB27-4CFB-A614-D771A26F891D}|ExcellOnServices.csproj|c:\\users\\aisha_ppxjc2l\\onedrive\\documents\\my web sites\\excellon consulting services management system\\source code\\controllers\\clientservicescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F5580DA1-CB27-4CFB-A614-D771A26F891D}|ExcellOnServices.csproj|solutionrelative:controllers\\clientservicescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F5580DA1-CB27-4CFB-A614-D771A26F891D}|ExcellOnServices.csproj|c:\\users\\aisha_ppxjc2l\\onedrive\\documents\\my web sites\\excellon consulting services management system\\source code\\controllers\\clientscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F5580DA1-CB27-4CFB-A614-D771A26F891D}|ExcellOnServices.csproj|solutionrelative:controllers\\clientscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F5580DA1-CB27-4CFB-A614-D771A26F891D}|ExcellOnServices.csproj|c:\\users\\aisha_ppxjc2l\\onedrive\\documents\\my web sites\\excellon consulting services management system\\source code\\controllers\\departmentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F5580DA1-CB27-4CFB-A614-D771A26F891D}|ExcellOnServices.csproj|solutionrelative:controllers\\departmentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F5580DA1-CB27-4CFB-A614-D771A26F891D}|ExcellOnServices.csproj|c:\\users\\aisha_ppxjc2l\\onedrive\\documents\\my web sites\\excellon consulting services management system\\source code\\controllers\\employeescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F5580DA1-CB27-4CFB-A614-D771A26F891D}|ExcellOnServices.csproj|solutionrelative:controllers\\employeescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F5580DA1-CB27-4CFB-A614-D771A26F891D}|ExcellOnServices.csproj|c:\\users\\aisha_ppxjc2l\\onedrive\\documents\\my web sites\\excellon consulting services management system\\source code\\views\\payments\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{F5580DA1-CB27-4CFB-A614-D771A26F891D}|ExcellOnServices.csproj|solutionrelative:views\\payments\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F5580DA1-CB27-4CFB-A614-D771A26F891D}|ExcellOnServices.csproj|c:\\users\\aisha_ppxjc2l\\onedrive\\documents\\my web sites\\excellon consulting services management system\\source code\\models\\department.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F5580DA1-CB27-4CFB-A614-D771A26F891D}|ExcellOnServices.csproj|solutionrelative:models\\department.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F5580DA1-CB27-4CFB-A614-D771A26F891D}|ExcellOnServices.csproj|c:\\users\\aisha_ppxjc2l\\onedrive\\documents\\my web sites\\excellon consulting services management system\\source code\\controllers\\reportscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F5580DA1-CB27-4CFB-A614-D771A26F891D}|ExcellOnServices.csproj|solutionrelative:controllers\\reportscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F5580DA1-CB27-4CFB-A614-D771A26F891D}|ExcellOnServices.csproj|c:\\users\\aisha_ppxjc2l\\onedrive\\documents\\my web sites\\excellon consulting services management system\\source code\\data\\databasehandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F5580DA1-CB27-4CFB-A614-D771A26F891D}|ExcellOnServices.csproj|solutionrelative:data\\databasehandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F5580DA1-CB27-4CFB-A614-D771A26F891D}|ExcellOnServices.csproj|c:\\users\\aisha_ppxjc2l\\onedrive\\documents\\my web sites\\excellon consulting services management system\\source code\\controllers\\servicescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F5580DA1-CB27-4CFB-A614-D771A26F891D}|ExcellOnServices.csproj|solutionrelative:controllers\\servicescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F5580DA1-CB27-4CFB-A614-D771A26F891D}|ExcellOnServices.csproj|c:\\users\\aisha_ppxjc2l\\onedrive\\documents\\my web sites\\excellon consulting services management system\\source code\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F5580DA1-CB27-4CFB-A614-D771A26F891D}|ExcellOnServices.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "PaymentsController.cs",
+              "DocumentMoniker": "C:\\Users\\aisha_ppxjc2l\\OneDrive\\Documents\\My Web Sites\\ExcellOn Consulting Services Management System\\source code\\Controllers\\PaymentsController.cs",
+              "RelativeDocumentMoniker": "Controllers\\PaymentsController.cs",
+              "ToolTip": "C:\\Users\\aisha_ppxjc2l\\OneDrive\\Documents\\My Web Sites\\ExcellOn Consulting Services Management System\\source code\\Controllers\\PaymentsController.cs*",
+              "RelativeToolTip": "Controllers\\PaymentsController.cs*",
+              "ViewState": "AgIAAA0BAAAAAAAAAAAYwB0BAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-18T10:00:16.978Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ClientsController.cs",
+              "DocumentMoniker": "C:\\Users\\aisha_ppxjc2l\\OneDrive\\Documents\\My Web Sites\\ExcellOn Consulting Services Management System\\source code\\Controllers\\ClientsController.cs",
+              "RelativeDocumentMoniker": "Controllers\\ClientsController.cs",
+              "ToolTip": "C:\\Users\\aisha_ppxjc2l\\OneDrive\\Documents\\My Web Sites\\ExcellOn Consulting Services Management System\\source code\\Controllers\\ClientsController.cs*",
+              "RelativeToolTip": "Controllers\\ClientsController.cs*",
+              "ViewState": "AgIAAKoAAAAAAAAAAAAuwLYAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-18T07:00:07.081Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "DepartmentsController.cs",
+              "DocumentMoniker": "C:\\Users\\aisha_ppxjc2l\\OneDrive\\Documents\\My Web Sites\\ExcellOn Consulting Services Management System\\source code\\Controllers\\DepartmentsController.cs",
+              "RelativeDocumentMoniker": "Controllers\\DepartmentsController.cs",
+              "ToolTip": "C:\\Users\\aisha_ppxjc2l\\OneDrive\\Documents\\My Web Sites\\ExcellOn Consulting Services Management System\\source code\\Controllers\\DepartmentsController.cs*",
+              "RelativeToolTip": "Controllers\\DepartmentsController.cs*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAIUAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-18T07:01:58.18Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ClientServicesController.cs",
+              "DocumentMoniker": "C:\\Users\\aisha_ppxjc2l\\OneDrive\\Documents\\My Web Sites\\ExcellOn Consulting Services Management System\\source code\\Controllers\\ClientServicesController.cs",
+              "RelativeDocumentMoniker": "Controllers\\ClientServicesController.cs",
+              "ToolTip": "C:\\Users\\aisha_ppxjc2l\\OneDrive\\Documents\\My Web Sites\\ExcellOn Consulting Services Management System\\source code\\Controllers\\ClientServicesController.cs*",
+              "RelativeToolTip": "Controllers\\ClientServicesController.cs*",
+              "ViewState": "AgIAANUAAAAAAAAAAAAQwOcAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-18T07:00:32.69Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "PaymentDecorator.cs",
+              "DocumentMoniker": "C:\\Users\\aisha_ppxjc2l\\OneDrive\\Documents\\My Web Sites\\ExcellOn Consulting Services Management System\\source code\\Models\\PaymentDecorator.cs",
+              "RelativeDocumentMoniker": "Models\\PaymentDecorator.cs",
+              "ToolTip": "C:\\Users\\aisha_ppxjc2l\\OneDrive\\Documents\\My Web Sites\\ExcellOn Consulting Services Management System\\source code\\Models\\PaymentDecorator.cs*",
+              "RelativeToolTip": "Models\\PaymentDecorator.cs*",
+              "ViewState": "AgIAAHcAAAAAAAAAAAAYwIcAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-18T07:12:28.81Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "EmployeesController.cs",
+              "DocumentMoniker": "C:\\Users\\aisha_ppxjc2l\\OneDrive\\Documents\\My Web Sites\\ExcellOn Consulting Services Management System\\source code\\Controllers\\EmployeesController.cs",
+              "RelativeDocumentMoniker": "Controllers\\EmployeesController.cs",
+              "ToolTip": "C:\\Users\\aisha_ppxjc2l\\OneDrive\\Documents\\My Web Sites\\ExcellOn Consulting Services Management System\\source code\\Controllers\\EmployeesController.cs*",
+              "RelativeToolTip": "Controllers\\EmployeesController.cs*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAALwAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-18T07:01:33.865Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Department.cs",
+              "DocumentMoniker": "C:\\Users\\aisha_ppxjc2l\\OneDrive\\Documents\\My Web Sites\\ExcellOn Consulting Services Management System\\source code\\Models\\Department.cs",
+              "RelativeDocumentMoniker": "Models\\Department.cs",
+              "ToolTip": "C:\\Users\\aisha_ppxjc2l\\OneDrive\\Documents\\My Web Sites\\ExcellOn Consulting Services Management System\\source code\\Models\\Department.cs",
+              "RelativeToolTip": "Models\\Department.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-18T07:15:05.649Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "C:\\Users\\aisha_ppxjc2l\\OneDrive\\Documents\\My Web Sites\\ExcellOn Consulting Services Management System\\source code\\Views\\Payments\\Create.cshtml",
+              "RelativeDocumentMoniker": "Views\\Payments\\Create.cshtml",
+              "ToolTip": "C:\\Users\\aisha_ppxjc2l\\OneDrive\\Documents\\My Web Sites\\ExcellOn Consulting Services Management System\\source code\\Views\\Payments\\Create.cshtml",
+              "RelativeToolTip": "Views\\Payments\\Create.cshtml",
+              "ViewState": "AgIAAH8BAAAAAAAAAAAYwI8BAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-18T07:16:56.487Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "ReportsController.cs",
+              "DocumentMoniker": "C:\\Users\\aisha_ppxjc2l\\OneDrive\\Documents\\My Web Sites\\ExcellOn Consulting Services Management System\\source code\\Controllers\\ReportsController.cs",
+              "RelativeDocumentMoniker": "Controllers\\ReportsController.cs",
+              "ToolTip": "C:\\Users\\aisha_ppxjc2l\\OneDrive\\Documents\\My Web Sites\\ExcellOn Consulting Services Management System\\source code\\Controllers\\ReportsController.cs",
+              "RelativeToolTip": "Controllers\\ReportsController.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAywBIAAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-18T06:52:22.845Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "ServicesController.cs",
+              "DocumentMoniker": "C:\\Users\\aisha_ppxjc2l\\OneDrive\\Documents\\My Web Sites\\ExcellOn Consulting Services Management System\\source code\\Controllers\\ServicesController.cs",
+              "RelativeDocumentMoniker": "Controllers\\ServicesController.cs",
+              "ToolTip": "C:\\Users\\aisha_ppxjc2l\\OneDrive\\Documents\\My Web Sites\\ExcellOn Consulting Services Management System\\source code\\Controllers\\ServicesController.cs",
+              "RelativeToolTip": "Controllers\\ServicesController.cs",
+              "ViewState": "AgIAAKwAAAAAAAAAAAAUwLsAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-18T06:49:28.031Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\aisha_ppxjc2l\\OneDrive\\Documents\\My Web Sites\\ExcellOn Consulting Services Management System\\source code\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\aisha_ppxjc2l\\OneDrive\\Documents\\My Web Sites\\ExcellOn Consulting Services Management System\\source code\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAGQAAAAAAAAAAAAcwHQAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-18T06:48:41.678Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "DatabaseHandler.cs",
+              "DocumentMoniker": "C:\\Users\\aisha_ppxjc2l\\OneDrive\\Documents\\My Web Sites\\ExcellOn Consulting Services Management System\\source code\\Data\\DatabaseHandler.cs",
+              "RelativeDocumentMoniker": "Data\\DatabaseHandler.cs",
+              "ToolTip": "C:\\Users\\aisha_ppxjc2l\\OneDrive\\Documents\\My Web Sites\\ExcellOn Consulting Services Management System\\source code\\Data\\DatabaseHandler.cs",
+              "RelativeToolTip": "Data\\DatabaseHandler.cs",
+              "ViewState": "AgIAADEAAAAAAAAAAAAkwAgAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-18T06:48:13.416Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

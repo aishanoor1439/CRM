@@ -3,35 +3,49 @@ using Microsoft.EntityFrameworkCore;
 using ExcellOnServices.Data;
 using ExcellOnServices.Models;
 using Microsoft.AspNetCore.Authorization;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace ExcellOnServices.Controllers
 {
     [Authorize]
     public class ClientsController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private ApplicationDbContext _context;
 
-        public ClientsController(ApplicationDbContext context)
+        // FIXED: Using Singleton Pattern instead of Dependency Injection
+        public ClientsController()
         {
-            _context = context;
+            _context = DatabaseHandler.GetContext();
         }
 
-        // GET: Clients with search
+        // Safety method to ensure context is valid
+        private void EnsureContext()
+        {
+            try
+            {
+                var test = _context.Model;
+            }
+            catch (ObjectDisposedException)
+            {
+                _context = DatabaseHandler.GetContext();
+            }
+        }
+
         public async Task<IActionResult> Index(string searchString, string statusFilter, string sortOrder)
         {
+            EnsureContext();
             ViewData["CurrentFilter"] = searchString;
             ViewData["StatusFilter"] = statusFilter;
             ViewData["CurrentSort"] = sortOrder;
 
-            // Set up sorting parameters
             ViewData["NameSortParam"] = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             ViewData["DateSortParam"] = sortOrder == "date" ? "date_desc" : "date";
             ViewData["StatusSortParam"] = sortOrder == "status" ? "status_desc" : "status";
 
-            var clients = from c in _context.Clients
-                          select c;
+            var clients = from c in _context.Clients select c;
 
-            // Apply search filter
             if (!string.IsNullOrEmpty(searchString))
             {
                 clients = clients.Where(c =>
@@ -42,37 +56,22 @@ namespace ExcellOnServices.Controllers
                     c.Address.Contains(searchString));
             }
 
-            // Apply status filter
             if (!string.IsNullOrEmpty(statusFilter))
             {
                 bool isActive = statusFilter == "active";
                 clients = clients.Where(c => c.IsActive == isActive);
             }
 
-            // Apply sorting
             switch (sortOrder)
             {
-                case "name_desc":
-                    clients = clients.OrderByDescending(c => c.CompanyName);
-                    break;
-                case "date":
-                    clients = clients.OrderBy(c => c.RegistrationDate);
-                    break;
-                case "date_desc":
-                    clients = clients.OrderByDescending(c => c.RegistrationDate);
-                    break;
-                case "status":
-                    clients = clients.OrderBy(c => c.IsActive);
-                    break;
-                case "status_desc":
-                    clients = clients.OrderByDescending(c => c.IsActive);
-                    break;
-                default:
-                    clients = clients.OrderBy(c => c.CompanyName);
-                    break;
+                case "name_desc": clients = clients.OrderByDescending(c => c.CompanyName); break;
+                case "date": clients = clients.OrderBy(c => c.RegistrationDate); break;
+                case "date_desc": clients = clients.OrderByDescending(c => c.RegistrationDate); break;
+                case "status": clients = clients.OrderBy(c => c.IsActive); break;
+                case "status_desc": clients = clients.OrderByDescending(c => c.IsActive); break;
+                default: clients = clients.OrderBy(c => c.CompanyName); break;
             }
 
-            // Get counts for filter display
             ViewData["TotalCount"] = await _context.Clients.CountAsync();
             ViewData["ActiveCount"] = await _context.Clients.CountAsync(c => c.IsActive);
             ViewData["InactiveCount"] = await _context.Clients.CountAsync(c => !c.IsActive);
@@ -80,111 +79,61 @@ namespace ExcellOnServices.Controllers
             return View(await clients.AsNoTracking().ToListAsync());
         }
 
-        // GET: Clients/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            EnsureContext();
+            if (id == null) return NotFound();
 
-            var client = await _context.Clients
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (client == null)
-            {
-                return NotFound();
-            }
+            var client = await _context.Clients.FirstOrDefaultAsync(m => m.Id == id);
+            if (client == null) return NotFound();
 
             return View(client);
         }
 
-        // GET: Clients/Create
         public IActionResult Create()
         {
+            EnsureContext();
             return View();
         }
 
-        // POST: Clients/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,CompanyName,ContactPerson,Email,Phone,Address,RegistrationDate,IsActive")] Client client)
         {
-            // Debug: Log model state
-            Console.WriteLine($"ModelState IsValid: {ModelState.IsValid}");
-
-            if (!ModelState.IsValid)
-            {
-                // Log all validation errors
-                var errors = ModelState
-                    .Where(x => x.Value.Errors.Count > 0)
-                    .Select(x => new { x.Key, Errors = x.Value.Errors.Select(e => e.ErrorMessage) })
-                    .ToList();
-
-                foreach (var error in errors)
-                {
-                    Console.WriteLine($"Field: {error.Key}");
-                    foreach (var err in error.Errors)
-                    {
-                        Console.WriteLine($"  - {err}");
-                    }
-                }
-
-                return View(client);
-            }
+            EnsureContext();
+            if (!ModelState.IsValid) return View(client);
 
             try
             {
-                // Ensure RegistrationDate has a value
-                if (client.RegistrationDate == default)
-                {
-                    client.RegistrationDate = DateTime.Now;
-                }
-
+                if (client.RegistrationDate == default) client.RegistrationDate = DateTime.Now;
                 _context.Add(client);
                 await _context.SaveChangesAsync();
-
                 TempData["SuccessMessage"] = "Client created successfully!";
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)
             {
-                // Log the exception
-                Console.WriteLine($"Error saving client: {ex.Message}");
-                if (ex.InnerException != null)
-                {
-                    Console.WriteLine($"Inner Exception: {ex.InnerException.Message}");
-                }
-
                 ModelState.AddModelError("", $"An error occurred while saving the client: {ex.Message}");
                 return View(client);
             }
         }
 
-        // GET: Clients/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            EnsureContext();
+            if (id == null) return NotFound();
 
             var client = await _context.Clients.FindAsync(id);
-            if (client == null)
-            {
-                return NotFound();
-            }
+            if (client == null) return NotFound();
             return View(client);
         }
 
-        // POST: Clients/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,CompanyName,ContactPerson,Email,Phone,Address,RegistrationDate,IsActive")] Client client)
         {
-            if (id != client.Id)
-            {
-                return NotFound();
-            }
+            EnsureContext();
+            if (id != client.Id) return NotFound();
 
             if (ModelState.IsValid)
             {
@@ -195,55 +144,39 @@ namespace ExcellOnServices.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ClientExists(client.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    if (!ClientExists(client.Id)) return NotFound();
+                    throw;
                 }
                 return RedirectToAction(nameof(Index));
             }
             return View(client);
         }
 
-        // GET: Clients/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            EnsureContext();
+            if (id == null) return NotFound();
 
-            var client = await _context.Clients
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (client == null)
-            {
-                return NotFound();
-            }
+            var client = await _context.Clients.FirstOrDefaultAsync(m => m.Id == id);
+            if (client == null) return NotFound();
 
             return View(client);
         }
 
-        // POST: Clients/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            EnsureContext();
             var client = await _context.Clients.FindAsync(id);
-            if (client != null)
-            {
-                _context.Clients.Remove(client);
-            }
-
+            if (client != null) _context.Clients.Remove(client);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool ClientExists(int id)
         {
+            EnsureContext();
             return _context.Clients.Any(e => e.Id == id);
         }
     }

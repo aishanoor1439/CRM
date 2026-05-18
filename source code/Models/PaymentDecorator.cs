@@ -9,18 +9,17 @@
             string GetDescription();
         }
 
-        // ==================== 2. BASE CALCULATOR (CORE PAYMENT) ====================
+        // ==================== 2. BASE CALCULATOR ====================
         public class BasePaymentCalculator : IPaymentCalculator
         {
             public decimal Calculate(decimal amount)
             {
-                // Base payment - no extra charges
                 return amount;
             }
 
             public string GetDescription()
             {
-                return "Base Payment (Full Amount)";
+                return "Base Payment";
             }
         }
 
@@ -45,31 +44,29 @@
             }
         }
 
-        // ==================== 4. CONCRETE DECORATOR - LATE FEE ====================
-        public class LateFeeDecorator : PaymentDecoratorBase
+        // ==================== 4. CUSTOM CHARGE DECORATOR ====================
+        public class CustomChargeDecorator : PaymentDecoratorBase
         {
-            private decimal _lateFeePercentage;
+            private decimal _customAmount;
 
-            public LateFeeDecorator(IPaymentCalculator calculator, decimal lateFeePercentage)
+            public CustomChargeDecorator(IPaymentCalculator calculator, decimal customAmount)
                 : base(calculator)
             {
-                _lateFeePercentage = lateFeePercentage;
+                _customAmount = customAmount;
             }
 
             public override decimal Calculate(decimal amount)
             {
-                decimal lateFee = amount * (_lateFeePercentage / 100);
-                decimal totalWithLateFee = base.Calculate(amount) + lateFee;
-                return totalWithLateFee;
+                return base.Calculate(amount) + _customAmount;
             }
 
             public override string GetDescription()
             {
-                return $"{_calculator.GetDescription()} + Late Fee ({_lateFeePercentage}%)";
+                return $"{_calculator.GetDescription()} + Custom Charge (${_customAmount})";
             }
         }
 
-        // ==================== 5. CONCRETE DECORATOR - PROCESSING FEE (NEW) ====================
+        // ==================== 5. PROCESSING FEE DECORATOR ====================
         public class ProcessingFeeDecorator : PaymentDecoratorBase
         {
             private decimal _fixedFee;
@@ -91,27 +88,48 @@
             }
         }
 
-        // ==================== 6. EXTRA: DISCOUNT DECORATOR (OPTIONAL) ====================
-        public class DiscountDecorator : PaymentDecoratorBase
+        // ==================== 6. TAX DECORATOR ====================
+        public class TaxDecorator : PaymentDecoratorBase
         {
-            private decimal _discountPercentage;
+            private decimal _taxPercentage;
 
-            public DiscountDecorator(IPaymentCalculator calculator, decimal discountPercentage)
+            public TaxDecorator(IPaymentCalculator calculator, decimal taxPercentage)
                 : base(calculator)
             {
-                _discountPercentage = discountPercentage;
+                _taxPercentage = taxPercentage;
             }
 
             public override decimal Calculate(decimal amount)
             {
-                decimal discount = amount * (_discountPercentage / 100);
-                decimal totalAfterDiscount = base.Calculate(amount) - discount;
-                return totalAfterDiscount < 0 ? 0 : totalAfterDiscount;
+                decimal taxAmount = amount * (_taxPercentage / 100);
+                return base.Calculate(amount) + taxAmount;
             }
 
             public override string GetDescription()
             {
-                return $"{_calculator.GetDescription()} + Discount ({_discountPercentage}%)";
+                return $"{_calculator.GetDescription()} + Tax ({_taxPercentage}%)";
+            }
+        }
+
+        // ==================== 7. TIP DECORATOR ====================
+        public class TipDecorator : PaymentDecoratorBase
+        {
+            private decimal _tipAmount;
+
+            public TipDecorator(IPaymentCalculator calculator, decimal tipAmount)
+                : base(calculator)
+            {
+                _tipAmount = tipAmount;
+            }
+
+            public override decimal Calculate(decimal amount)
+            {
+                return base.Calculate(amount) + _tipAmount;
+            }
+
+            public override string GetDescription()
+            {
+                return $"{_calculator.GetDescription()} + Tip (${_tipAmount})";
             }
         }
     }
